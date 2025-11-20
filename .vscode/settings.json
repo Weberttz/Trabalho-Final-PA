@@ -2,6 +2,7 @@
   "files.associations": {
     "tabuleiro.h": "c",
     "stdio.h": "c",
-    "stdlib.h": "c"
+    "stdlib.h": "c",
+    "jogo.h": "c"
   }
 }
