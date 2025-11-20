@@ -1,12 +1,6 @@
-  ____ _______ _   _ 
- |  _ \__   __| \ | |
- | |_) | | |  |  \| |
- |  _ <  | |  | . ` |
- | |_) | | |  | |\  |
- |____/  |_|  |_| \_|
-                     
-                                                                      
+INSTRUÇÕES ->
 
-
-
-
+1.  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati odio
+2.  architecto nulla id deserunt, atque nostrum neque, vel asperiores rerum
+3.  consectetur blanditiis incidunt doloremque iste sint fugit! Vitae, inventore
+4.  porro!
