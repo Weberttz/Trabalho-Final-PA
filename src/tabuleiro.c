@@ -1,33 +1,46 @@
 #include "../include/tabuleiro.h"
 #include <stdio.h>
-
-struct tabuleiros tabuleiro_j1, tabuleiro_j2;
+#include <stdlib.h>
 
 void montarTabuleiros() {
-    for(int i = 0; i < TAMANHO; i++){
-        for (int j = 0; j < TAMANHO; j++){
-            tabuleiro_j1.matriz_tabuleiro[i][j] = '~';
-            tabuleiro_j2.matriz_tabuleiro[i][j] = '~';
+    for(int i = 0; i < tamanho; i++){
+        for(int j = 0; j < tamanho; j++){
+            tabuleiro_j1[i][j].impressao = '~';
+            tabuleiro_j2[i][j].impressao = '~';
+
+            tabuleiro_j1[i][j].valor = 0;
+            tabuleiro_j2[i][j].valor = 0;
+            
+            tabuleiro_j1[i][j].aberto = 0;
+            tabuleiro_j2[i][j].aberto = 0;
         }
     }
 }
 
-void imprimirTabuleiroj1() {
-    printf("Jogador 1:\n");
-    for(int i = 0; i< TAMANHO; i++){
-        for(int j=0; j< TAMANHO; j++){
-            printf("%c ", tabuleiro_j1.matriz_tabuleiro[i][j]);
+void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
+    printf("    ");
+    
+    for(int j = 0; j< tamanho; j++){
+        printf("%d  ", j);
+    }
+    printf("\n");
+
+    for(int i = 0; i< tamanho; i++){
+        printf("%2d  ", i);
+        for(int j=0; j< tamanho; j++){
+                printf("%c  ", tabuleiro[i][j].impressao);
         }
         printf("\n");
     }
 }
 
-void imprimirTabuleiroj2() {
-      printf("\nJogador 2:\n");
-    for(int i = 0; i< TAMANHO; i++){
-        for(int j=0; j< TAMANHO; j++){
-            printf("%c ", tabuleiro_j2.matriz_tabuleiro[i][j]);
+void mudarRepresentantes(Celulas tabuleiro[tamanho][tamanho]){
+
+    for(int i=0; i<tamanho; i++){
+        for(int j=0; j<tamanho; j++){
+            tabuleiro[i][j].impressao = '~';
         }
-        printf("\n");
-    }
+    } 
 }
+
+

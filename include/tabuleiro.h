@@ -1,18 +1,17 @@
 #ifndef TABULEIRO_H_
 #define TABULEIRO_H_
 
-#define TAMANHO 5
+#include "modulos.h"
 
-struct tabuleiros {
-    int jogador;
-    char matriz_tabuleiro[TAMANHO][TAMANHO];
-};
+#define tamanho 10
 
-extern struct tabuleiros tabuleiro_j1;
-extern struct tabuleiros tabuleiro_j2;
+Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
 
+//Função que monta os tabuleiros
 void montarTabuleiros();
-void imprimirTabuleiroj1();
-void imprimirTabuleiroj2();
+//Função que imprime o tabuleiro do jogador1
+void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]);
+//Função que muda os representantes das células(tabuleiro);
+void mudarRepresentantes(Celulas tabuleiro[tamanho][tamanho]);
 
 #endif

@@ -3,6 +3,9 @@
     "tabuleiro.h": "c",
     "stdio.h": "c",
     "stdlib.h": "c",
-    "jogo.h": "c"
+    "jogo.h": "c",
+    "navios.h": "c",
+    "wchar.h": "c",
+    "modulos.h": "c"
   }
 }

@@ -1,42 +1,51 @@
 #include "../include/jogo.h"
 #include <stdio.h>
+#include <wchar.h>
 #include <stdlib.h>
+#include <locale.h>
+#include <string.h>
 
 void novojogo(){
-    int vez = 1;
-    int sair = 0;
+
+    setlocale(LC_ALL, "Portuguese_Brazil.1252");
+    int vez = 1, sair = 0;
+    partida.rodada_alocacao = 0;
+
     while (!sair) {
         clear();
-        printf("\nVez do Jogador %d\n\n", vez);
-        printf("Mapa do jogador adversario\n\n");
-        if (vez == 1) {
-            imprimirTabuleiroj2();
-        } else {
-            imprimirTabuleiroj1();
-        }
-        printf("\nEscolha uma ação:\n");
-        printf("[1] Testar jogada\n");
-        printf("[0] Sair para o menu\n");
-        printf("Digite a opção: ");
-
+        while(partida.rodada_alocacao == 0){
+            if(vez == 1)
+                alocacaoInicial(vez, tabuleiro_j1, jogador1);
+            else{
+                alocacaoInicial(vez, tabuleiro_j2, jogador2);
+                partida.rodada_alocacao = 1;
+            }   
+            printf("Pressione Enter para continuar...");
+            getchar();
+            getchar();
+            vez = trocarVez(vez);   
+        }   
+        printf("Vez do jogador %d", vez);
+        wprintf(L"Mapa do jogador adversário\n");
+        
         int opc;
+        clear();
+        if(vez == 1)
+            imprimirTabuleiro(tabuleiro_j1);
+        else
+            imprimirTabuleiro(tabuleiro_j2);
+        wprintf(L"Digite uma opção: ");
         scanf("%d", &opc);
 
         switch (opc) {
             case 1:
-                printf("Jogador %d realizou uma ação (simulada).\n", vez);
-                printf("Pressione Enter para continuar...");
-                getchar();
-                getchar();
-                vez = trocarVez(vez);
+                printf("Palpite");
                 break;
-
             case 0:
                 sair = 1;
                 break;
-
             default:
-                printf("Opção inválida. Tente novamente.\n");
+                wprintf(L"Opção inválida. Tente novamente.\n");
                 printf("Pressione Enter para continuar...");
                 getchar();
                 getchar();
@@ -64,16 +73,19 @@ void instrucoes(){
     FILE *arquivo; 
 
     arquivo = fopen("../data/instrucoes.txt", "r");
-    char linha[100];
-    while (fgets(linha, sizeof(linha), arquivo)) {    
-        printf("%s", linha);
+
+    if(arquivo == NULL){
+        printf("Erro ao abrir o arquivo");
+    }
+    wchar_t linha[256];
+    while (fgetws(linha, sizeof(linha), arquivo)) {
+        wprintf(L"%ls", linha);
     }
 
     fclose(arquivo);
 
         printf("\nPressione Enter para voltar...");
         getchar();
-        getchar();
+        //getchar();
         clear();
-
 }

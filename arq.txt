@@ -1,0 +1,38 @@
+cada célula tem o conteúdo a ser printado (~, o, x)
+            tem a variável de verificação para aberta e fechada (0, 1)
+            tem uma variável inteira que armazena o numero do navio (1, 2, 3, 4)
+
+o Porta-aviões – 5 células (id = 4)
+o Navio-tanque – 4 células (id = 3)
+o Submarino – 3 células (id = 2)
+o Bote – 2 células (id = 1)
+
+
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~   
+
+
+jogador 1 escolhe o barco, posição incial e a orientação e direção
+
+barco: 1 - pos: 0,0 direção: n - linha: -1, -2, -3, -4
+
+barco2: 2 - pos: 4,4 direção: l - linha: constante, coluna: +1, +2 -> 4,5 e 4,6
+
+
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 1 1 0 -> ~ ~ b b ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~
+0 0 0 0 0 -> ~ ~ ~ ~ ~   
+
+~ ~ ~ ~ ~
+~ ~ X X ~
+~ ~ ~ ~ ~
+~ ~ ~ ~ ~
+~ ~ ~ ~ ~   
+
+
+Estrutura
