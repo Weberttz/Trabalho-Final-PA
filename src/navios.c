@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "../include/navios.h"
 
 void preparaIds(Player *jogador){
@@ -7,11 +8,7 @@ void preparaIds(Player *jogador){
     }
 }
 
-int verificarId(int i, Player *jogador){
-    if(jogador->navios[i].id < 1 || jogador->navios[i].id > total_navios){
-        printf("Esse navio não existe\n");
-        return 0;
-    }
+int verificarAlocacao(int i, Player *jogador){
     for(int j=0; j<total_navios; j++){
             if(j != i && jogador->navios[j].id == jogador->navios[i].id){
                 printf("Esse navio ja foi alocado, tente outro\n");
@@ -19,6 +16,14 @@ int verificarId(int i, Player *jogador){
         }
     }
     return 1;
+}
+
+int verificarViabilidade(int tamanho_navio, int x, int y, Celulas tabuleiro[tamanho][tamanho]) {
+    if (verificarPosicao('s', tamanho_navio, x, y, tabuleiro)) return 1;
+    if (verificarPosicao('n', tamanho_navio, x, y, tabuleiro)) return 1;
+    if (verificarPosicao('l', tamanho_navio, x, y, tabuleiro)) return 1;
+    if (verificarPosicao('o', tamanho_navio, x, y, tabuleiro)) return 1;
+    return 0;
 }
 
 int verificarPosicao(char direcao, int tamanho_navio, int x, int y, Celulas tabuleiro[tamanho][tamanho]){
@@ -92,72 +97,132 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player j
 
     do{
         clear();
-        printf("---Período de alocação dos barcos---\n\n");
+        wprintf(L"---Período de alocação dos barcos---\n\n");
         printf("Vez do jogador %d\n\n", vezAtual);
         imprimirTabuleiro(tabuleiro);
 
-        printf("\nsExistem %d barcos restantes para alocação.\n\n", total_navios - i);
+        wprintf(L"\nExistem %d barcos restantes para alocação.\n\n", total_navios - i);
 
         for(int j = 0; j < total_navios; j++){
             if(valor[j] == 0){
                 printf("# ID %d -> %s\n", j+1, nomes[j]);
             }
         }
-        id:
-        printf("\nDigite o id do navio que vc quer alocar:");
-        scanf("%d", &jogador.navios[i].id);
-        if(!verificarId(i, &jogador)){
-            goto id;
-        };
+        
+        do{
+            printf("\nDigite o id do navio que vc quer alocar:");
+            if(scanf("%d", &jogador.navios[i].id) != 1){
+                wprintf(L"Entrava inválida. Digite um número!\n");
+                while (getchar() != '\n');
+                continue;
+            }
+            if(jogador.navios[i].id < 1 || jogador.navios[i].id > total_navios){
+                printf("ID fora do intervalo! Digite entre 1 e %d \n", total_navios);
+                continue;
+            }
+            if(!verificarAlocacao(i, &jogador)){
+                continue;
+            }
+            break;
+        }while(1);
+
         valor[jogador.navios[i].id-1] = jogador.navios[i].id;
         switch (jogador.navios[i].id)
         {
         case 1:
             jogador.navios[i].representante = 'b';
             jogador.navios[i].tamanho_navio = 2;
+            jogador.navios[i].vida = 2;
             break;
         case 2:
             jogador.navios[i].representante = 's';
             jogador.navios[i].tamanho_navio = 3;
+            jogador.navios[i].vida = 3;
             break;
         case 3:
             jogador.navios[i].representante = 'n';
             jogador.navios[i].tamanho_navio = 4;
+            jogador.navios[i].vida = 4;
             break;
         case 4:
             jogador.navios[i].representante = 'p';
             jogador.navios[i].tamanho_navio = 5;
+            jogador.navios[i].vida = 5;
             break;  
         default:
-            printf("Valor inválido.");
-            goto id;
+            wprintf(L"Valor inválido.");    
+            continue;
             break;
         }
-        pos:
-        printf("Digite a posicao inicial do seu navio, x e y separados por espaco: ");
-        scanf("%d %d%*c", &jogador.navios[i].pos_incial[0], &jogador.navios[i].pos_incial[1]);
-        if(jogador.navios[i].pos_incial[0] > tamanho-1 || jogador.navios[i].pos_incial[0] < 0 ||
-            jogador.navios[i].pos_incial[1] > tamanho-1 ||jogador.navios[i].pos_incial[1] < 0){
-            printf("Posicao fora do mapa\n");
-            goto pos;
-        }
-        if(tabuleiro[jogador.navios[i].pos_incial[0]][jogador.navios[i].pos_incial[1]].valor != 0)
-        {
-            printf("Ja possui um barco nessa posicao\n");
-            goto pos;
-        }
-
-        direcao:
-        printf("Digite a direção do seu navio (s, n, l, o): ");
-        scanf("%c%*c", &jogador.navios[i].direcao);
-        if(!verificarPosicao(jogador.navios[i].direcao, jogador.navios[i].tamanho_navio, 
-            jogador.navios[i].pos_incial[0], jogador.navios[i].pos_incial[1], tabuleiro)){
-            printf("Impossível colocar navio nessa direção!\n");
-            goto direcao;
-        }
-        alocarNavio(i, tabuleiro, jogador);
+        do{
+            wprintf(L"Digite a linha da posição incial do seu navio: ");
+             if(scanf("%d", &jogador.navios[i].pos_incial[0]) != 1){
+                wprintf(L"Entrava inválida. Digite um número!\n");
+                clearBuffer(); 
+                continue;
+            }
+            wprintf(L"Digite a coluna da posição incial do seu navio: ");
+             if(scanf("%d", &jogador.navios[i].pos_incial[1]) != 1){
+                wprintf(L"Entrava inválida. Digite um número!\n");
+                clearBuffer(); 
+                continue;
+            } // 
+            int l = jogador.navios[i].pos_incial[0];
+            int c = jogador.navios[i].pos_incial[1];
+                     
+            if(l >= tamanho || l < 0 ||
+            c >= tamanho ||c < 0){
+                printf("Posicao fora do mapa. D:<\n");
+                continue;
+            }
+            if(tabuleiro[l][c].valor != 0)
+            {
+                printf("Ja possui um navio nessa posicao. =/\n");
+                continue;
+            }
+            if(!verificarViabilidade(jogador.navios[i].tamanho_navio, l, c, tabuleiro)) { 
+                wprintf(L"Impossível alocar o navio de tamanho %d a partir desta posição em QUALQUER direção. Escolha outra posição, bobão! \n", jogador.navios[i].tamanho_navio);
+                continue;
+            }
+            break;
+        }while(1);
         
+        do{
+            printf("Digite a direção do seu navio (n, s, l, o): ");
+            scanf(" %c", &jogador.navios[i].direcao);
+            jogador.navios[i].direcao = tolower(jogador.navios[i].direcao); 
+            
+            if(!verificarPosicao(jogador.navios[i].direcao, jogador.navios[i].tamanho_navio, 
+                jogador.navios[i].pos_incial[0], jogador.navios[i].pos_incial[1], tabuleiro)){
+                wprintf(L"Impossível colocar navio nessa direção!\n"); 
+            }else {
+                break;
+            }
+        }while(1);
+        
+        alocarNavio(i, tabuleiro, jogador);
         i++;
+        
     }while(i < total_navios);
+    clear();
+    printf("Tabuleiro do jogador %d\n\n", vezAtual);
+    imprimirTabuleiro(tabuleiro);
     mudarRepresentantes(tabuleiro); 
+    wprintf(L"\nConfiguração bem sucedida.\n");
+}
+
+int danosNavais(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+    int contador = 0;
+    for(int i=0; i<tamanho; i++){
+        for(int j = 0; j<tamanho; j++){
+            if(tabuleiro[i][j].valor == id && tabuleiro[i][j].impressao ==  '%'){ 
+                contador++;
+            }
+        }
+    }
+    for(int i = 0; i<total_navios; i++){
+        if(jogador->navios[i].id == id && contador == jogador->navios[i].tamanho_navio)
+            return 0;
+    }
+    return 1;
 }

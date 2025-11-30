@@ -28,7 +28,30 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
     for(int i = 0; i< tamanho; i++){
         printf("%2d  ", i);
         for(int j=0; j< tamanho; j++){
-                printf("%c  ", tabuleiro[i][j].impressao);
+            switch(tabuleiro[i][j].impressao){
+                case '~':
+                    printf("\033[34m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case 'b':
+                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case 'n':
+                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case 'p':
+                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case 's':
+                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case '%':
+                    printf("\033[31m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+                case 'x':
+                    printf("\033[37m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
+            }
+            
         }
         printf("\n");
     }

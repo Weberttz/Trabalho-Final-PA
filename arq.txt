@@ -35,4 +35,30 @@ barco2: 2 - pos: 4,4 direção: l - linha: constante, coluna: +1, +2 -> 4,5 e 4,
 ~ ~ ~ ~ ~   
 
 
+linha de cima
+linha de baixo
+coluna da esquerda
+coluna da direita
+
+Os dois jogadores alocaram os barcos, então agora precisamos dos palpites.
+
+
+
 Estrutura
+
+
+Palpites dos jogadores
+
+turnos devem aumentar
+
+caso um jogador acerte um barco, ele tem direito a mais uma rodada
+
+se acertou, o representante vai ficar 'x'
+
+se errou, o respresentante vai ficar 'o'
+
+se derrubou o barco, o representante vai ficar 'X'
+
+
+Saves
+
