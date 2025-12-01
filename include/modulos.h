@@ -7,14 +7,12 @@
 typedef struct{
     char impressao;
     int valor;
-    int aberto;
 }Celulas;
 
 //Struct que contém as informações dos navios
 typedef struct{
     int id, vida, tamanho_navio, pos_incial[2];
     char representante, direcao;
-    int colocado;
 }Navios;
 
 //struct que contém as infomações de cada jogador
@@ -22,10 +20,10 @@ typedef struct {
     Navios navios[total_navios];
     int acertos, erros, navios_restantes;
 }Player;
+
 //Struct que contém as informações do jogo
 typedef struct {
-    //Player p1, p2;
-    int turno, rodada, rodada_alocacao;
+    int turno, rodada, rodada_alocacao, vez, fim;
 }Jogo;
 
 Player jogador1, jogador2;

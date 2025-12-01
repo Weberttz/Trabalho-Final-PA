@@ -59,29 +59,29 @@ int verificarPosicao(char direcao, int tamanho_navio, int x, int y, Celulas tabu
     return 1;
 }
 
-void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player jogador){
-    int x = jogador.navios[i].pos_incial[0];
-    int y = jogador.navios[i].pos_incial[1];
+void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+    int x = jogador->navios[i].pos_incial[0];
+    int y = jogador->navios[i].pos_incial[1];
     
-    for(int l = 0; l< jogador.navios[i].tamanho_navio; l++){
+    for(int l = 0; l< jogador->navios[i].tamanho_navio; l++){
         
-        switch (jogador.navios[i].direcao)
+        switch (jogador->navios[i].direcao)
         {
         case 's':
-            tabuleiro[x + l][y].impressao = jogador.navios[i].representante;
-            tabuleiro[x + l][y].valor = jogador.navios[i].id;
+            tabuleiro[x + l][y].impressao = jogador->navios[i].representante;
+            tabuleiro[x + l][y].valor = jogador->navios[i].id;
             break;
         case 'n':
-            tabuleiro[x - l][y].impressao = jogador.navios[i].representante;
-            tabuleiro[x - l][y].valor = jogador.navios[i].id;
+            tabuleiro[x - l][y].impressao = jogador->navios[i].representante;
+            tabuleiro[x - l][y].valor = jogador->navios[i].id;
             break;
         case 'l':
-            tabuleiro[x][y + l].impressao = jogador.navios[i].representante;
-            tabuleiro[x][y + l].valor = jogador.navios[i].id;
+            tabuleiro[x][y + l].impressao = jogador->navios[i].representante;
+            tabuleiro[x][y + l].valor = jogador->navios[i].id;
             break;
         case 'o':
-            tabuleiro[x][y - l].impressao = jogador.navios[i].representante;
-            tabuleiro[x][y-l].valor = jogador.navios[i].id;
+            tabuleiro[x][y - l].impressao = jogador->navios[i].representante;
+            tabuleiro[x][y-l].valor = jogador->navios[i].id;
             break;
         default:
             break;
@@ -89,11 +89,12 @@ void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player jogador){
     }
 }
 
-void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player jogador){
-    
+void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+
     int i = 0, valor[total_navios] = {0};
-    preparaIds(&jogador);
-    char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-aviões"};
+    jogador->navios_restantes = total_navios;
+    preparaIds(jogador);
+    char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
 
     do{
         clear();
@@ -111,43 +112,43 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player j
         
         do{
             printf("\nDigite o id do navio que vc quer alocar:");
-            if(scanf("%d", &jogador.navios[i].id) != 1){
+            if(scanf("%d", &jogador->navios[i].id) != 1){
                 wprintf(L"Entrava inválida. Digite um número!\n");
-                while (getchar() != '\n');
+                clearBuffer();
                 continue;
             }
-            if(jogador.navios[i].id < 1 || jogador.navios[i].id > total_navios){
+            if(jogador->navios[i].id < 1 || jogador->navios[i].id > total_navios){
                 printf("ID fora do intervalo! Digite entre 1 e %d \n", total_navios);
                 continue;
             }
-            if(!verificarAlocacao(i, &jogador)){
+            if(!verificarAlocacao(i, jogador)){
                 continue;
             }
             break;
         }while(1);
 
-        valor[jogador.navios[i].id-1] = jogador.navios[i].id;
-        switch (jogador.navios[i].id)
+        valor[jogador->navios[i].id-1] = jogador->navios[i].id;
+        switch (jogador->navios[i].id)
         {
         case 1:
-            jogador.navios[i].representante = 'b';
-            jogador.navios[i].tamanho_navio = 2;
-            jogador.navios[i].vida = 2;
+            jogador->navios[i].representante = 'b';
+            jogador->navios[i].tamanho_navio = 2;
+            jogador->navios[i].vida = 2;
             break;
         case 2:
-            jogador.navios[i].representante = 's';
-            jogador.navios[i].tamanho_navio = 3;
-            jogador.navios[i].vida = 3;
+            jogador->navios[i].representante = 's';
+            jogador->navios[i].tamanho_navio = 3;
+            jogador->navios[i].vida = 3;
             break;
         case 3:
-            jogador.navios[i].representante = 'n';
-            jogador.navios[i].tamanho_navio = 4;
-            jogador.navios[i].vida = 4;
+            jogador->navios[i].representante = 'n';
+            jogador->navios[i].tamanho_navio = 4;
+            jogador->navios[i].vida = 4;
             break;
         case 4:
-            jogador.navios[i].representante = 'p';
-            jogador.navios[i].tamanho_navio = 5;
-            jogador.navios[i].vida = 5;
+            jogador->navios[i].representante = 'p';
+            jogador->navios[i].tamanho_navio = 5;
+            jogador->navios[i].vida = 5;
             break;  
         default:
             wprintf(L"Valor inválido.");    
@@ -156,19 +157,19 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player j
         }
         do{
             wprintf(L"Digite a linha da posição incial do seu navio: ");
-             if(scanf("%d", &jogador.navios[i].pos_incial[0]) != 1){
+             if(scanf("%d", &jogador->navios[i].pos_incial[0]) != 1){
                 wprintf(L"Entrava inválida. Digite um número!\n");
                 clearBuffer(); 
                 continue;
             }
             wprintf(L"Digite a coluna da posição incial do seu navio: ");
-             if(scanf("%d", &jogador.navios[i].pos_incial[1]) != 1){
+             if(scanf("%d", &jogador->navios[i].pos_incial[1]) != 1){
                 wprintf(L"Entrava inválida. Digite um número!\n");
                 clearBuffer(); 
                 continue;
-            } // 
-            int l = jogador.navios[i].pos_incial[0];
-            int c = jogador.navios[i].pos_incial[1];
+            } 
+            int l = jogador->navios[i].pos_incial[0];
+            int c = jogador->navios[i].pos_incial[1];
                      
             if(l >= tamanho || l < 0 ||
             c >= tamanho ||c < 0){
@@ -180,8 +181,8 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player j
                 printf("Ja possui um navio nessa posicao. =/\n");
                 continue;
             }
-            if(!verificarViabilidade(jogador.navios[i].tamanho_navio, l, c, tabuleiro)) { 
-                wprintf(L"Impossível alocar o navio de tamanho %d a partir desta posição em QUALQUER direção. Escolha outra posição, bobão! \n", jogador.navios[i].tamanho_navio);
+            if(!verificarViabilidade(jogador->navios[i].tamanho_navio, l, c, tabuleiro)) { 
+                wprintf(L"Impossível alocar o navio de tamanho %d a partir desta posição em QUALQUER direção. Escolha outra posição, bobão! \n", jogador->navios[i].tamanho_navio);
                 continue;
             }
             break;
@@ -189,11 +190,11 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player j
         
         do{
             printf("Digite a direção do seu navio (n, s, l, o): ");
-            scanf(" %c", &jogador.navios[i].direcao);
-            jogador.navios[i].direcao = tolower(jogador.navios[i].direcao); 
+            scanf(" %c", &jogador->navios[i].direcao);
+            jogador->navios[i].direcao = tolower(jogador->navios[i].direcao); 
             
-            if(!verificarPosicao(jogador.navios[i].direcao, jogador.navios[i].tamanho_navio, 
-                jogador.navios[i].pos_incial[0], jogador.navios[i].pos_incial[1], tabuleiro)){
+            if(!verificarPosicao(jogador->navios[i].direcao, jogador->navios[i].tamanho_navio, 
+                jogador->navios[i].pos_incial[0], jogador->navios[i].pos_incial[1], tabuleiro)){
                 wprintf(L"Impossível colocar navio nessa direção!\n"); 
             }else {
                 break;
@@ -215,14 +216,15 @@ int danosNavais(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Pla
     int contador = 0;
     for(int i=0; i<tamanho; i++){
         for(int j = 0; j<tamanho; j++){
-            if(tabuleiro[i][j].valor == id && tabuleiro[i][j].impressao ==  '%'){ 
+            if(tabuleiro[i][j].valor == id && tabuleiro[i][j].impressao == impressao){ 
                 contador++;
             }
         }
     }
     for(int i = 0; i<total_navios; i++){
         if(jogador->navios[i].id == id && contador == jogador->navios[i].tamanho_navio)
-            return 0;
+            return 1;
+        
     }
-    return 1;
+    return 0;
 }

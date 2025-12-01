@@ -53,12 +53,34 @@ turnos devem aumentar
 
 caso um jogador acerte um barco, ele tem direito a mais uma rodada
 
-se acertou, o representante vai ficar 'x'
+se acertou, o representante vai ficar '%'
 
-se errou, o respresentante vai ficar 'o'
+se errou, o respresentante vai ficar 'x'
 
-se derrubou o barco, o representante vai ficar 'X'
+se derrubou o barco, o representante vai ficar '#'
 
 
 Saves
+
+A ordem dos saves é importante
+
+1 - quantidade de rodadas           |   struct Jogo
+
+2 - acertos do jogador 1            |
+3 - erros do jogador 1              |   struct Player que contém o struct Navios
+4 - navios restantes do jogador 1   |
+5 - struct de navios do jogador 1   |
+
+5- impressoes de cada célula do tabuleiro do joagdor 1  |   struct Celulas
+6 - valores de cada célula do tabuleiro do jogador 1    |
+
+
+Análogo 
+
+7 - acertos do jogador 2
+8 - erros do jogador 2
+9 - navios restantes do jogador 2
+10 - struct de navios do jogador 2
+11 - impressoes de cada célula do tabuleiro do joagdor 2
+12 - valores de cada célula do tabuleiro do jogador 2
 

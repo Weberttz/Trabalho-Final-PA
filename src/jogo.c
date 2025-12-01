@@ -7,29 +7,37 @@
 void novojogo(){
     montarTabuleiros();
     setlocale(LC_ALL, "Portuguese_Brazil.1252");
-    int vez = 1, sair = 0;
+    partida.turno = 1;
     partida.rodada_alocacao = 0;
+    partida.fim = 0;
 
-    while (!sair) {
-        clear();
-        while(partida.rodada_alocacao == 0){
-            if(vez == 1)
-                alocacaoInicial(vez, tabuleiro_j1, jogador1);
-            else{
-                alocacaoInicial(vez, tabuleiro_j2, jogador2);
-                partida.rodada_alocacao = 1;
-            }   
-            printf("Pressione Enter para continuar...");
-            getchar();
-            getchar();
-            vez = trocarVez(vez);   
+    clear();
+    while(partida.rodada_alocacao == 0){
+        if(partida.turno == 1)
+            alocacaoInicial(partida.turno, tabuleiro_j1, &jogador1);
+        else{
+            alocacaoInicial(partida.turno, tabuleiro_j2, &jogador2);
+            partida.rodada_alocacao = 1;
         }   
-        printf("Vez do jogador %d", vez);
-        wprintf(L"Mapa do jogador adversário\n");
-        
-        int opc;
-        clear();
-        if(vez == 1)
+        printf("Pressione Enter para continuar...");
+        getchar();
+        getchar();
+        partida.turno = trocarVez(partida.turno);   
+    }   
+
+    salvarJogo();
+    execJogo();
+}
+
+void execJogo(){
+    int opc, sair = 0;
+
+    while(!partida.fim && sair == 0){
+
+        printf("Vez do jogador %d\n", partida.turno);
+        wprintf(L"Tabuleiro do jogador %d\n\n", 3 - partida.turno); 
+
+        if(partida.turno == 1)
             imprimirTabuleiro(tabuleiro_j2);
         else
             imprimirTabuleiro(tabuleiro_j1);
@@ -38,17 +46,17 @@ void novojogo(){
 
         switch (opc) {
             case 1:
-                if(vez == 1)
-                    realizarPalpite(&jogador1, tabuleiro_j2);
+                if(partida.turno == 1)
+                    realizarPalpite(&jogador1, &jogador2, tabuleiro_j2);
                 else
-                    realizarPalpite(&jogador2, tabuleiro_j1);
+                    realizarPalpite(&jogador2, &jogador1 , tabuleiro_j1);
 
                 printf("Pressione Enter para continuar...");
                 getchar();
-                getchar();
-                vez = trocarVez(vez);
+                partida.turno = trocarVez(partida.turno);
                 break;
             case 0:
+                salvarJogo();
                 sair = 1;
                 break;
             default:
@@ -58,21 +66,21 @@ void novojogo(){
                 getchar();
                 break;
         }
+        clear();
     }
-    clear();
 }
 
-void realizarPalpite(Player *jogador, Celulas tabuleiro_adversario[tamanho][tamanho]){
+void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]){
     int x,y;
     do {
-        printf("Digite a linha do palpite (0-%d)" , tamanho-1);
+        printf("Digite a linha do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &x) != 1) {
             printf("Entrada inválida! Digite um número!\n");
             clearBuffer();
             continue;
         }
 
-        printf("Digite a coluna do palpite (0-%d)" , tamanho-1);
+        printf("Digite a coluna do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &y) != 1) {
             printf("Entrada inválida! Digite um número!\n");
             clearBuffer();
@@ -82,7 +90,7 @@ void realizarPalpite(Player *jogador, Celulas tabuleiro_adversario[tamanho][tama
             printf("Posição fora do tabuleiro! Tente novamente.\n");
             continue; 
         }
-        if(tabuleiro_adversario[x][y].impressao == 'X' || tabuleiro_adversario[x][y].impressao == 'x' || tabuleiro_adversario[x][y].impressao == 'O'){
+        if(tabuleiro_adversario[x][y].impressao == '#' || tabuleiro_adversario[x][y].impressao == '%' || tabuleiro_adversario[x][y].impressao == 'x'){
             printf("Você já tentou essa posição! Escolha outra. \n");
             continue;
         }
@@ -98,14 +106,20 @@ void realizarPalpite(Player *jogador, Celulas tabuleiro_adversario[tamanho][tama
         tabuleiro_adversario[x][y].impressao = '%';
         if(danosNavais(tabuleiro_adversario[x][y].valor, tabuleiro_adversario[x][y].impressao, tabuleiro_adversario, jogador)){
             printf("\nO navio %d foi afundado!", id);
+            jogador_adversario->navios_restantes--;
         }
-        //return 1;
+        if(jogador_adversario->navios_restantes == 0){
+            printf("\nFim de jogo, jogador %d venceu!!", partida.turno);
+            partida.fim = 1;
+        }
     }
     else{
         wprintf(L"Água!\n");
         tabuleiro_adversario[x][y].impressao = 'x';
-        //return 0;
     }
+    printf("\nPressione enter para continuar");
+    getchar();
+    getchar();
     clear();
     imprimirTabuleiro(tabuleiro_adversario);
 }

@@ -10,9 +10,6 @@ void montarTabuleiros() {
 
             tabuleiro_j1[i][j].valor = 0;
             tabuleiro_j2[i][j].valor = 0;
-            
-            tabuleiro_j1[i][j].aberto = 0;
-            tabuleiro_j2[i][j].aberto = 0;
         }
     }
 }

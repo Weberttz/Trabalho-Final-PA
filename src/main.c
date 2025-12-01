@@ -21,15 +21,21 @@ int main() {
         printf("[0] Sair \n");
         wprintf(L"Selecione a opção que você deseja: ");
 
-        scanf("%d%*c", &resposta);
+        if(!scanf("%d", &resposta)){
+            clearBuffer();
+            wprintf(L"Entrava inválida. Digite um número!\n");
+            getchar();
+            clear();
+            continue;
+        }
 
         switch (resposta){
             case 1:                 
                 novojogo();
                 break;
             case 2:
-                wprintf(L"Carregar jogo ainda não implementado.\n");
-                clear();
+                carregarJogo();
+                execJogo();
                 break;
             case 3:
                 instrucoes();
@@ -41,7 +47,7 @@ int main() {
                 wprintf(L"Opção inválida! Tente novamente.\n");
                 printf("Pressione Enter para continuar...");
                 getchar();
-                //getchar();
+                getchar();
                 clear();
                 break;
         }
