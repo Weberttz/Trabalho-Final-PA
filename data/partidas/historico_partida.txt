@@ -1,0 +1,8 @@
+Quantidade de rodadas: 14
+Jogador vencedor: 2
+Acertos: 14
+Erros: 0
+
+Jogador perderdor 1
+Acertos: 11
+Erros: 3

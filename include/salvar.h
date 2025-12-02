@@ -6,6 +6,7 @@
 
 //Função que salva o jogo
 void salvarJogo();
+
 //Função que carrega o jogo
 void carregarJogo();
 

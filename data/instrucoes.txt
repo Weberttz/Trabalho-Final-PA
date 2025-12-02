@@ -6,23 +6,21 @@
  |_____|_| |_|___/\__|_|   \__,_|\___\___/ \___||___/
 
 
-     N
-     |
-O -- + -- L
-     |
-     S
-     
-1- Os  jogadores  se  alternam  em  turnos  de  ataque.  Cada  jogada  consiste  
-em informar  coordenadas  (linha  e  coluna)  para  atacar  o  tabuleiro  inimigo.  
-O sistema indicará o resultado do ataque (acerto, erro ou navio afundado). 
-O jogo termina quando todos os navios de um jogador forem destruidos. 
+Rodada de alocacao: 
 
-2- Ao final da partida, o sistema irá exibir o vencedor, o numero de acertos e 
-erros  de  ambos  os  jogadores  e  a  quantidade  de  rodadas.  Essas  informações 
-tambem constarão constar em um arquivo de texto.
-
-3- Cada jogador devera posicionar seus navios manualmente, informando 
+1- Cada jogador devera posicionar seus navios manualmente, informando 
 coordenadas validas dentro do tabuleiro:  
     * Dois navios nao podem ocupar a mesma posicao; 
     * Um navio nao pode ser posicionado fora do tabuleiro
+
+Rodadas de palpites:
+
+1- Os  jogadores  se  alternam  em  turnos  de  ataque.  Cada  jogada  consiste  
+em informar  coordenadas  (linha  e  coluna)  para  atacar  o  tabuleiro  inimigo.             
+O sistema indicara o resultado do ataque (acerto, erro ou navio afundado).            
+O jogo termina quando todos os navios de um jogador forem destruidos. 
+
+2- Ao final da partida, o sistema ira exibir o vencedor, o numero de acertos e 
+erros  de  ambos  os  jogadores  e  a  quantidade  de  rodadas.  Essas  informações 
+tambem constarão constar em um arquivo de texto.
 

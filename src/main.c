@@ -42,7 +42,10 @@ int main() {
                 break;
             case 0:
                 printf("Saindo...\n");
-                return 0;        
+                return 0;
+            case 4:
+                chamarCreditos();
+                break;      
             default:
                 wprintf(L"Opção inválida! Tente novamente.\n");
                 printf("Pressione Enter para continuar...");

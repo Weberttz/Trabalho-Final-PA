@@ -47,6 +47,9 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
                 case 'x':
                     printf("\033[37m%c  \33[0m", tabuleiro[i][j].impressao);
                 break;
+                case '#':
+                    printf("\033[31m%c  \33[0m", tabuleiro[i][j].impressao);
+                break;
             }
             
         }
@@ -55,12 +58,20 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
 }
 
 void mudarRepresentantes(Celulas tabuleiro[tamanho][tamanho]){
-
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
             tabuleiro[i][j].impressao = '~';
         }
-    } 
+    }
 }
 
+void mudarRepNavio(int id, Celulas tabuleiro[tamanho][tamanho])
+{
+    for(int i=0; i<tamanho; i++){
+        for(int j=0; j<tamanho; j++){
+            if(tabuleiro[i][j].valor == id)
+                tabuleiro[i][j].impressao = '#';
+        }
+    }
+}
 

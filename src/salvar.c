@@ -1,24 +1,6 @@
 #include <stdio.h>
 #include "../include/salvar.h"
 
-/*
-A ordem dos saves é importante, pois da forma que a gente salvar influencia na forma de carregar
-
-1 - quantidade de rodadas           |   struct Jogo
-
-2 - acertos do jogador 1            |
-3 - erros do jogador 1              |   struct Player que contém o struct Navios
-4 - navios restantes do jogador 1   |
-5 - struct de navios do jogador 1   |
-
-5- impressoes de cada célula do tabuleiro do joagdor 1  |   struct Celulas
-6 - valores de cada célula do tabuleiro do jogador 1    |
-
-Análogo para o jogador 2
-*/
-
-//olha lákkkkk, como que tá ai? o save.txt sério? Aqui tá estranho, olha lá no zap
-// 
 const char *nomeArquivo = "../data/partidas/save.txt"; 
 
 void salvarJogo() {

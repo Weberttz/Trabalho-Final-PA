@@ -2,7 +2,7 @@
 #include <ctype.h>
 #include "../include/navios.h"
 
-void preparaIds(Player *jogador){
+void prepararIds(Player *jogador){
     for(int i = 0; i<total_navios; i++){
        jogador->navios[i].id = -1;
     }
@@ -93,16 +93,16 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
 
     int i = 0, valor[total_navios] = {0};
     jogador->navios_restantes = total_navios;
-    preparaIds(jogador);
+    prepararIds(jogador);
     char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
 
     do{
         clear();
-        wprintf(L"---Período de alocação dos barcos---\n\n");
+        wprintf(L"---Período de alocação dos navios---\n\n");
         printf("Vez do jogador %d\n\n", vezAtual);
         imprimirTabuleiro(tabuleiro);
 
-        wprintf(L"\nExistem %d barcos restantes para alocação.\n\n", total_navios - i);
+        wprintf(L"\nExistem %d navios restantes para alocação.\n\n", total_navios - i);
 
         for(int j = 0; j < total_navios; j++){
             if(valor[j] == 0){
@@ -208,11 +208,11 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
     clear();
     printf("Tabuleiro do jogador %d\n\n", vezAtual);
     imprimirTabuleiro(tabuleiro);
-    mudarRepresentantes(tabuleiro); 
+    mudarRepresentantes(tabuleiro);
     wprintf(L"\nConfiguração bem sucedida.\n");
 }
 
-int danosNavais(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+int verificarNavio(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
     int contador = 0;
     for(int i=0; i<tamanho; i++){
         for(int j = 0; j<tamanho; j++){
