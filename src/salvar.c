@@ -16,7 +16,7 @@ void salvarJogo() {
     fwrite(&tabuleiro_j2, sizeof(Celulas), tamanho * tamanho, arquivo);
     fclose(arquivo);
 
-    printf("Jogo salvo com sucesso em '%s'.\n", nomeArquivo);
+    //printf("Jogo salvo com sucesso em '%s'.\n", nomeArquivo);
 }
 
 void carregarJogo() {
@@ -33,5 +33,5 @@ void carregarJogo() {
     fread(&tabuleiro_j2, sizeof(Celulas), tamanho * tamanho, arquivo);
     fclose(arquivo);
 
-    printf("Jogo carregado do local '%s'.\n", nomeArquivo);
+    //printf("Jogo carregado do local '%s'.\n", nomeArquivo);
 }

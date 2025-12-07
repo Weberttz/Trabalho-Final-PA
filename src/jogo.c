@@ -30,8 +30,10 @@ void novojogo(){
 
 void execJogo(){
     int opc, sair = 0;
-    clear();
+    //clear();
     while(!partida.fim && sair == 0){
+        do{
+        clear();
         printf("Rodada: %d\n", partida.rodada);
         printf("Vez do jogador %d\n", partida.vez);
         wprintf(L"Tabuleiro do jogador %d\n\n", 3 - partida.vez); 
@@ -40,9 +42,15 @@ void execJogo(){
             imprimirTabuleiro(tabuleiro_j2);
         else
             imprimirTabuleiro(tabuleiro_j1);
+        
         wprintf(L"\n[1] Realizar Palpite\n[0] Sair\nDigite uma opção: ");
         scanf("%d", &opc);
         clearBuffer();
+            if(opc !=1 && opc !=0){
+                wprintf(L"Opção inválida, tecle enter para continuar");
+                getchar();
+            }
+        }while(opc !=1 && opc !=0);
 
         switch (opc) {
             case 1:
@@ -50,11 +58,12 @@ void execJogo(){
                     realizarPalpite(&jogador1, &jogador2, tabuleiro_j2);
                 else{
                     realizarPalpite(&jogador2, &jogador1 , tabuleiro_j1);
-                    partida.rodada++;
+                    partida.rodada++;   
                 }
                 printf("\nPressione Enter para continuar...");
                 getchar();
                 partida.vez = trocarVez(partida.vez);
+                salvarJogo();
                 break;
             case 0:
                 salvarJogo();

@@ -32,6 +32,7 @@ Jogo partida;
 
 //Função que limpa o terminal 
 void clear();
+
 //Função que limpa o buffer
 void clearBuffer();
 
