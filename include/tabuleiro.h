@@ -7,7 +7,7 @@
 
 #define tamanho 10
 
-Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
+extern Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
 
 //Função que monta os tabuleiros
 void montarTabuleiros();

@@ -6,6 +6,8 @@ CMakeFiles/batalha-naval.dir/src/salvar.c.obj: \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\stddef.h \
  c:\mingw\include\sys/types.h \
  c:\mingw\lib\gcc\mingw32\6.3.0\include\stdarg.h \
+ c:\mingw\include\stdlib.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdbool.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\salvar.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\modulos.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\tabuleiro.h

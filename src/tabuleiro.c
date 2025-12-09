@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
+
 void montarTabuleiros() {
     for(int i = 0; i < tamanho; i++){
         for(int j = 0; j < tamanho; j++){

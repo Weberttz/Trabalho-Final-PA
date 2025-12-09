@@ -13,6 +13,7 @@ CMakeFiles/batalha-naval.dir/src/main.c.obj: \
  c:\mingw\include\io.h c:\mingw\include\stdint.h c:\mingw\include\time.h \
  c:\mingw\include\locale.h c:\mingw\include\process.h \
  c:\mingw\include\locale.h \
+ c:\mingw\lib\gcc\mingw32\6.3.0\include\stdbool.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\jogo.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\modulos.h \
  c:\users\johng\onedrive\documentos\c\ -\ c++\trabalho-final-pa\include\tabuleiro.h \

@@ -29,8 +29,8 @@ typedef struct {
     int vencedor, perdedor;
 }Jogo;
 
-Player jogador1, jogador2;
-Jogo partida;
+extern Player jogador1, jogador2;
+extern Jogo partida;
 
 //Função que limpa o terminal 
 void clear();

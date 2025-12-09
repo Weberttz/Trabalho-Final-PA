@@ -6,6 +6,9 @@
 #include <string.h>
 #include <stdbool.h>
 
+Player jogador1, jogador2;
+Jogo partida;
+
 void novojogo(){
     montarTabuleiros();
     partida.rodada = 1;
@@ -78,11 +81,12 @@ void execJogo(){
         }
         clear();
     }
-
-    printf("Partida encerrada. Inicie uma nova partida.");
-    printf("\nPressione Enter para continuar...");
-    getchar();
-    getchar();
+    if(partida.fim){
+        printf("Partida encerrada. Inicie uma nova partida.");
+        printf("\nPressione Enter para continuar...");
+        getchar();
+        getchar();
+    }
 }
 
 void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]){
