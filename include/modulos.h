@@ -1,6 +1,8 @@
 #ifndef MODULOS_H_
 #define MODULOS_H_
 
+#pragma once
+
 #define total_navios 4
 
 //struct que contém as informações de cada célula do tabuleiro
@@ -23,7 +25,7 @@ typedef struct {
 
 //Struct que contém as informações do jogo
 typedef struct {
-    int turno, rodada, rodada_alocacao, vez, fim;
+    int rodada, rodada_alocacao, vez, fim;
     int vencedor, perdedor;
 }Jogo;
 

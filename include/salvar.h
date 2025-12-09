@@ -1,6 +1,8 @@
 #ifndef SALVAR_H_
 #define SALVAR_H_
 
+#pragma once
+
 #include "modulos.h"
 #include "tabuleiro.h"
 

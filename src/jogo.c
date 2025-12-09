@@ -2,7 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <time.h>
 #include <string.h>
+#include <stdbool.h>
 
 void novojogo(){
     montarTabuleiros();
@@ -30,7 +32,6 @@ void novojogo(){
 
 void execJogo(){
     int opc, sair = 0;
-    //clear();
     while(!partida.fim && sair == 0){
         do{
         clear();
@@ -66,7 +67,7 @@ void execJogo(){
                 salvarJogo();
                 break;
             case 0:
-                salvarJogo();
+                //salvarJogo();
                 sair = 1;
                 break;
             default:
@@ -77,10 +78,15 @@ void execJogo(){
         }
         clear();
     }
+
+    printf("Partida encerrada. Inicie uma nova partida.");
+    printf("\nPressione Enter para continuar...");
+    getchar();
+    getchar();
 }
 
 void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]){
-    int x,y;
+    int x,y, soma = 3; //Jogadores ( 1 + 2 )
     do {
         printf("Digite a linha do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &x) != 1) {
@@ -115,20 +121,10 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         jogador->acertos++;
         tabuleiro_adversario[x][y].impressao = '%';
 
-        if(verificarNavio(tabuleiro_adversario[x][y].valor, tabuleiro_adversario[x][y].impressao, tabuleiro_adversario, jogador)){
+        if(verificarVida(tabuleiro_adversario[x][y].valor, tabuleiro_adversario, jogador)){
             printf("\nO navio %d foi afundado!", id);
             mudarRepNavio(id, tabuleiro_adversario);
             jogador_adversario->navios_restantes--;
-        }
-
-        if(jogador_adversario->navios_restantes == 0){
-            printf("\nFim de jogo, jogador %d venceu!!", partida.vez);
-            partida.vencedor = partida.vez;
-            partida.perdedor = 3 - partida.vez;
-            partida.fim = 1;
-            criarCreditos(jogador, jogador_adversario);
-
-            chamarCreditos();
         }
     }
     else{
@@ -142,6 +138,15 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
     clear();
     wprintf(L"A configuração do tabuleiro do adversário ficou assim\n\n");
     imprimirTabuleiro(tabuleiro_adversario);
+
+    if(jogador_adversario->navios_restantes == 0){
+        printf("\nFim de jogo, jogador %d venceu!!", partida.vez);
+        partida.vencedor = partida.vez;
+        partida.perdedor = soma - partida.vez;
+        partida.fim = 1;
+        criarCreditos(jogador, jogador_adversario);
+        chamarCreditos();
+    }
 }
 
 int trocarVez(int vezAtual) {
@@ -170,9 +175,9 @@ void instrucoes(){
     if(arquivo == NULL){
         printf("Erro ao abrir o arquivo");
     }
-    wchar_t linha[256];
-    while (fgetws(linha, sizeof(linha), arquivo)) {
-        wprintf(L"%s", linha);
+    char linha[256];
+    while (fgets(linha, sizeof(linha), arquivo)) {
+        printf("%s", linha);
     }
 
     fclose(arquivo);
@@ -220,8 +225,4 @@ void chamarCreditos(){
     }
 
     fclose(arquivo);
-    printf("\n\nPressione enter para voltar ao menu...");
-    getchar();
-    getchar();
-    clear();
 }

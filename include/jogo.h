@@ -1,7 +1,8 @@
 #ifndef JOGO_H_
 #define JOGO_H_
 
-#include <wchar.h>
+#pragma once
+
 #include "modulos.h"
 #include "tabuleiro.h"
 #include "navios.h"

@@ -93,6 +93,8 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
 
     int i = 0, valor[total_navios] = {0};
     jogador->navios_restantes = total_navios;
+    jogador->acertos = 0;
+    jogador->erros = 0;
     prepararIds(jogador);
     char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
 
@@ -173,12 +175,12 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
                      
             if(l >= tamanho || l < 0 ||
             c >= tamanho ||c < 0){
-                printf("Posicao fora do mapa. D:<\n");
+                wprintf(L"Posição fora do mapa. D:<\n");
                 continue;
             }
             if(tabuleiro[l][c].valor != 0)
             {
-                printf("Ja possui um navio nessa posicao. =/\n");
+                wprintf(L"Ja possui um navio nessa posição. =/\n");
                 continue;
             }
             if(!verificarViabilidade(jogador->navios[i].tamanho_navio, l, c, tabuleiro)) { 
@@ -189,7 +191,7 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
         }while(1);
         
         do{
-            printf("Digite a direção do seu navio (n, s, l, o): ");
+            wprintf(L"Digite a direção do seu navio (n, s, l, o): ");
             scanf(" %c", &jogador->navios[i].direcao);
             jogador->navios[i].direcao = tolower(jogador->navios[i].direcao); 
             
@@ -212,19 +214,17 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
     wprintf(L"\nConfiguração bem sucedida.\n");
 }
 
-int verificarNavio(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
-    int contador = 0;
-    for(int i=0; i<tamanho; i++){
-        for(int j = 0; j<tamanho; j++){
-            if(tabuleiro[i][j].valor == id && tabuleiro[i][j].impressao == impressao){ 
-                contador++;
-            }
-        }
-    }
+int verificarVida(int id, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+    int contador = 0, indice;
     for(int i = 0; i<total_navios; i++){
-        if(jogador->navios[i].id == id && contador == jogador->navios[i].tamanho_navio)
-            return 1;
-        
+        if(jogador->navios[i].id == id){
+            indice = i;
+            jogador->navios[i].vida--;
+        }  
     }
+
+    if(jogador->navios[indice].vida == 0)
+        return 1;
+    
     return 0;
 }

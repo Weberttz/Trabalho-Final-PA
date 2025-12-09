@@ -4,5 +4,5 @@ Acertos: 14
 Erros: 0
 
 Jogador perderdor 1
-Acertos: 11
-Erros: 3
+Acertos: 13
+Erros: 1

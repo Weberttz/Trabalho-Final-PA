@@ -2,13 +2,15 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <locale.h>
+#include <stdbool.h>
 #include "../include/jogo.h"
 
 int main() {
+    
     int resposta;
     FILE *menu;
     char linha[256];
-    setlocale(LC_ALL, "Portuguese_Brazil.1252");
+    setlocale(LC_ALL, "Portuguese");
 
     while (1) {  
         menu = fopen("../data/menu.txt", "r");
@@ -24,6 +26,7 @@ int main() {
         if(!scanf("%d", &resposta)){
             clearBuffer();
             wprintf(L"Entrava inválida. Digite um número!\n");
+            printf("Pressione Enter para continuar...");
             getchar();
             clear();
             continue;
@@ -42,18 +45,15 @@ int main() {
                 break;
             case 0:
                 printf("Saindo...\n");
-                return 0;
-            case 4:
-                chamarCreditos();
-                break;      
+                return 0;    
             default:
                 wprintf(L"Opção inválida! Tente novamente.\n");
                 printf("Pressione Enter para continuar...");
                 getchar();
                 getchar();
-                clear();
                 break;
         }
+        clear();
     }
 
     return 0;

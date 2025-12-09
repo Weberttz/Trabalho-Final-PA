@@ -22,5 +22,5 @@ O jogo termina quando todos os navios de um jogador forem destruidos.
 
 2- Ao final da partida, o sistema ira exibir o vencedor, o numero de acertos e 
 erros  de  ambos  os  jogadores  e  a  quantidade  de  rodadas.  Essas  informacoes 
-tambem constarão constar em um arquivo de texto.
+tambem constarao constar em um arquivo de texto.
 

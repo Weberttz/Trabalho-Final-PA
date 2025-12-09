@@ -1,6 +1,8 @@
 #ifndef TABULEIRO_H_
 #define TABULEIRO_H_
 
+#pragma once
+
 #include "modulos.h"
 
 #define tamanho 10

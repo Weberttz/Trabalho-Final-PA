@@ -1,6 +1,8 @@
 #ifndef NAVIOS_H_
 #define NAVIOS_H_
 
+#pragma once
+
 #include "tabuleiro.h"
 #include "modulos.h"
 
@@ -23,6 +25,6 @@ int verificarPosicao(char direcao, int tamanho_navio, int x, int y, Celulas tabu
 int verificarViabilidade(int tamanho_navio, int x, int y, Celulas tabuleiro[tamanho][tamanho]);
 
 //Função que verifica se o navio foi afundado
-int verificarNavio(int id, char impressao, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
+int verificarVida(int id, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
 
 #endif
