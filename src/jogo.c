@@ -40,18 +40,18 @@ void execJogo(){
         clear();
         printf("Rodada: %d\n", partida.rodada);
         printf("Vez do jogador %d\n", partida.vez);
-        wprintf(L"Tabuleiro do jogador %d\n\n", 3 - partida.vez); 
+        printf("Tabuleiro do jogador %d\n\n", 3 - partida.vez); 
 
         if(partida.vez == 1)
             imprimirTabuleiro(tabuleiro_j2);
         else
             imprimirTabuleiro(tabuleiro_j1);
         
-        wprintf(L"\n[1] Realizar Palpite\n[0] Sair\nDigite uma opção: ");
+        printf("\n[1] Realizar Palpite\n[0] Sair\nDigite uma opcao: ");
         scanf("%d", &opc);
         clearBuffer();
             if(opc !=1 && opc !=0){
-                wprintf(L"Opção inválida, tecle enter para continuar");
+                printf("Opção invalida, tecle enter para continuar");
                 getchar();
             }
         }while(opc !=1 && opc !=0);
@@ -74,7 +74,7 @@ void execJogo(){
                 sair = 1;
                 break;
             default:
-                wprintf(L"Opção inválida. Tente novamente.\n");
+                printf("Opção inválida. Tente novamente.\n");
                 printf("Pressione Enter para continuar...");
                 getchar();
                 break;
@@ -94,23 +94,23 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
     do {
         printf("Digite a linha do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &x) != 1) {
-            wprintf(L"Entrada inválida! Digite um número!\n");
+            printf("Entrada invalida! Digite um número!\n");
             clearBuffer();
             continue;
         }
 
         printf("Digite a coluna do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &y) != 1) {
-            wprintf(L"Entrada inválida! Digite um número!\n");
+            printf("Entrada invalida! Digite um numero!\n");
             clearBuffer();
             continue;
         }
         if(x < 0 || x >= tamanho || y < 0 || y >= tamanho ){
-            wprintf(L"Posição fora do tabuleiro! Tente novamente.\n");
+            printf("Posicao fora do tabuleiro! Tente novamente.\n");
             continue; 
         }
         if(tabuleiro_adversario[x][y].impressao == '#' || tabuleiro_adversario[x][y].impressao == '%' || tabuleiro_adversario[x][y].impressao == 'x'){
-            wprintf(L"Você já tentou essa posição! Escolha outra. \n");
+            printf("Voce ja tentou essa posicao! Escolha outra. \n");
             continue;
         }
         break;
@@ -132,7 +132,7 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         }
     }
     else{
-        wprintf(L"Água!\n");
+        printf("Acertou... na Agua! :p\n");
         tabuleiro_adversario[x][y].impressao = 'x';
         jogador->erros++;
     }
@@ -140,7 +140,7 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
     getchar();
     getchar();
     clear();
-    wprintf(L"A configuração do tabuleiro do adversário ficou assim\n\n");
+    printf("A configuracao do tabuleiro do adversario ficou assim: \n\n");
     imprimirTabuleiro(tabuleiro_adversario);
 
     if(jogador_adversario->navios_restantes == 0){

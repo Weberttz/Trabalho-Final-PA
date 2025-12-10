@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <wchar.h>
 #include <locale.h>
 #include <stdbool.h>
 #include "../include/jogo.h"
@@ -19,13 +18,13 @@ int main() {
         }
         printf("[1] Novo jogo \n");
         printf("[2] Continuar jogo \n");
-        wprintf(L"[3] Instruções \n");
+        printf("[3] Instrucoes \n");
         printf("[0] Sair \n");
-        wprintf(L"Selecione a opção que você deseja: ");
+        printf("Selecione a opcao que voce deseja: ");
 
         if(!scanf("%d", &resposta)){
             clearBuffer();
-            wprintf(L"Entrava inválida. Digite um número!\n");
+            printf("Entrada invalida. Digite um numero!\n");
             printf("Pressione Enter para continuar...");
             getchar();
             clear();
@@ -47,7 +46,7 @@ int main() {
                 printf("Saindo...\n");
                 return 0;    
             default:
-                wprintf(L"Opção inválida! Tente novamente.\n");
+                printf("Opcao invalida! Tente novamente.\n");
                 printf("Pressione Enter para continuar...");
                 getchar();
                 getchar();

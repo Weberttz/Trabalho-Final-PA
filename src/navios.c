@@ -100,11 +100,11 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
 
     do{
         clear();
-        wprintf(L"---Período de alocação dos navios---\n\n");
+        printf("--- Periodo de alocação dos navios ---\n\n");
         printf("Vez do jogador %d\n\n", vezAtual);
         imprimirTabuleiro(tabuleiro);
 
-        wprintf(L"\nExistem %d navios restantes para alocação.\n\n", total_navios - i);
+        printf("\nExistem %d navios restantes para alocacao.\n\n", total_navios - i);
 
         for(int j = 0; j < total_navios; j++){
             if(valor[j] == 0){
@@ -115,7 +115,7 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
         do{
             printf("\nDigite o id do navio que vc quer alocar:");
             if(scanf("%d", &jogador->navios[i].id) != 1){
-                wprintf(L"Entrava inválida. Digite um número!\n");
+                printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer();
                 continue;
             }
@@ -153,20 +153,20 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
             jogador->navios[i].vida = 5;
             break;  
         default:
-            wprintf(L"Valor inválido.");    
+            printf("Valor invalido.");    
             continue;
             break;
         }
         do{
-            wprintf(L"Digite a linha da posição incial do seu navio: ");
+            printf("Digite a linha da posicao incial do seu navio: ");
              if(scanf("%d", &jogador->navios[i].pos_incial[0]) != 1){
-                wprintf(L"Entrava inválida. Digite um número!\n");
+                printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
                 continue;
             }
-            wprintf(L"Digite a coluna da posição incial do seu navio: ");
+            printf("Digite a coluna da posicao incial do seu navio: ");
              if(scanf("%d", &jogador->navios[i].pos_incial[1]) != 1){
-                wprintf(L"Entrava inválida. Digite um número!\n");
+                printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
                 continue;
             } 
@@ -175,29 +175,29 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
                      
             if(l >= tamanho || l < 0 ||
             c >= tamanho ||c < 0){
-                wprintf(L"Posição fora do mapa. D:<\n");
+                printf("Posicao fora do mapa. D:<\n");
                 continue;
             }
             if(tabuleiro[l][c].valor != 0)
             {
-                wprintf(L"Ja possui um navio nessa posição. =/\n");
+                printf("Ja possui um navio nessa posicao. =/\n");
                 continue;
             }
             if(!verificarViabilidade(jogador->navios[i].tamanho_navio, l, c, tabuleiro)) { 
-                wprintf(L"Impossível alocar o navio de tamanho %d a partir desta posição em QUALQUER direção. Escolha outra posição, bobão! \n", jogador->navios[i].tamanho_navio);
+                printf("Impossivel alocar o navio de tamanho %d a partir desta posição em QUALQUER direcao. Escolha outra posicao, bobao! \n", jogador->navios[i].tamanho_navio);
                 continue;
             }
             break;
         }while(1);
         
         do{
-            wprintf(L"Digite a direção do seu navio (n, s, l, o): ");
+            printf("Digite a direcao do seu navio (n, s, l, o): ");
             scanf(" %c", &jogador->navios[i].direcao);
             jogador->navios[i].direcao = tolower(jogador->navios[i].direcao); 
             
             if(!verificarPosicao(jogador->navios[i].direcao, jogador->navios[i].tamanho_navio, 
                 jogador->navios[i].pos_incial[0], jogador->navios[i].pos_incial[1], tabuleiro)){
-                wprintf(L"Impossível colocar navio nessa direção!\n"); 
+                printf("Impossivel colocar navio nessa direcao!\n"); 
             }else {
                 break;
             }
@@ -211,7 +211,7 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
     printf("Tabuleiro do jogador %d\n\n", vezAtual);
     imprimirTabuleiro(tabuleiro);
     mudarRepresentantes(tabuleiro);
-    wprintf(L"\nConfiguração bem sucedida.\n");
+    printf("\nConfiguracao bem sucedida.\n");
 }
 
 int verificarVida(int id, Celulas tabuleiro[tamanho][tamanho], Player *jogador){

@@ -24,7 +24,7 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
 void execJogo();
 
 //Função que cria o arquivo txt com as informações de quem venceu, perdeu, acertos e erros dos dois jogadores
-void criarCreditos();
+void criarCreditos(Player *jogador, Player *jogador_adversario);
 
 //Função que lê as informações do arquivo txt com o histórico da partida
 void chamarCreditos();
