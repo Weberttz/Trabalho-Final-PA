@@ -33,20 +33,44 @@ void novojogo(){
     execJogo();
 }
 
+void mostrarNaviosRestantes(Player *jogador){
+    char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
+
+    printf("\n--- Navios restantes para acertar ---\n");
+    printf("\nTotal: %d\n", jogador->navios_restantes);
+
+    for(int i = 0; i < total_navios; i++){
+        if(jogador->navios[i].id <= 0) continue;
+
+        int id = jogador->navios[i].id;
+        int vida = jogador->navios[i].vida;
+        int total = jogador->navios[i].tamanho_navio;
+        
+        printf("# %s (ID %d): %d/%d %s\n",nomes[id - 1],id,vida,total, vida == 0 ? "[AFUNDADO]" : "");
+    }
+
+    printf("\n");
+}
+
 void execJogo(){
     int opc, sair = 0;
     while(!partida.fim && sair == 0){
         do{
         clear();
-        printf("Rodada: %d\n", partida.rodada);
-        printf("Vez do jogador %d\n", partida.vez);
-        printf("Tabuleiro do jogador %d\n\n", 3 - partida.vez); 
+        printf("-> Rodada: %d\n", partida.rodada);
+        printf("-> Vez do jogador: %d\n\n", partida.vez);
+        printf("--> Tabuleiro do jogador %d \n", 3 - partida.vez); 
 
         if(partida.vez == 1)
             imprimirTabuleiro(tabuleiro_j2);
-        else
+        else 
             imprimirTabuleiro(tabuleiro_j1);
-        
+
+        if(partida.vez == 1)
+        mostrarNaviosRestantes(&jogador1);
+        else
+        mostrarNaviosRestantes(&jogador2);
+
         printf("\n[1] Realizar Palpite\n[0] Sair\nDigite uma opcao: ");
         scanf("%d", &opc);
         clearBuffer();

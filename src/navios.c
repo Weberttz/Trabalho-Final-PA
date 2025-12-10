@@ -96,6 +96,7 @@ void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *
     jogador->acertos = 0;
     jogador->erros = 0;
     prepararIds(jogador);
+    
     char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
 
     do{

@@ -17,7 +17,7 @@ void montarTabuleiros() {
 }
 
 void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
-    printf("    ");
+    printf("\n    ");
     
     for(int j = 0; j< tamanho; j++){
         printf("%d  ", j);
@@ -32,26 +32,48 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
                     printf("\033[34m%c  \33[0m", tabuleiro[i][j].impressao);
                 break;
                 case 'b':
-                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);   
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);   
                 break;
                 case 'n':
-                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);
                 break;
                 case 'p':
-                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);
                 break;
                 case 's':
-                    printf("\033[32m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);
                 break;
                 case '%':
-                    printf("\033[31m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);  
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao); 
                 break;
                 case 'x':
-                    printf("\033[37m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);  
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);  
                 break;
                 case '#':
-                    printf("\033[31m%c  \33[0m", tabuleiro[i][j].impressao);
+                if (partida.vez == 1)
+                    printf("\033[36m%c  \033[0m", tabuleiro[i][j].impressao);  
+                else
+                    printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);  
                 break;
+
             }
             
         }
