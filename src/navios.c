@@ -9,8 +9,8 @@ void prepararIds(Player *jogador){
 }
 
 int verificarAlocacao(int i, Player *jogador){
-    for(int j=0; j<total_navios; j++){
-            if(j != i && jogador->navios[j].id == jogador->navios[i].id){
+    for(int j=i-1; j>=0; j--){
+            if(jogador->navios[j].id == jogador->navios[i].id){
                 printf("Esse navio ja foi alocado, tente outro\n");
                 return 0;
         }
@@ -89,7 +89,7 @@ void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
     }
 }
 
-void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
+void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
 
     int i = 0, valor[total_navios] = {0};
     jogador->navios_restantes = total_navios;

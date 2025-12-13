@@ -10,7 +10,7 @@
 void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
 
 //Função que aloca os navios incialmente
-void alocacaoInicial(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
+void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
 
 //Função que prepara os navios para uma verificação de id
 void prepararIds(Player *jogador);

@@ -5,7 +5,6 @@
 #include "../include/jogo.h"
 
 int main() {
-    
     int resposta;
     FILE *menu;
     char linha[256];

@@ -11,6 +11,8 @@ Jogo partida;
 
 void novojogo(){
     montarTabuleiros();
+    partida.tam_historico = 1;
+    partida.historico = malloc((partida.tam_historico+1) * sizeof(char*));
     partida.rodada = 1;
     partida.vez = 1;
     partida.rodada_alocacao = 0;
@@ -19,9 +21,9 @@ void novojogo(){
     clear();
     while(partida.rodada_alocacao == 0){
         if(partida.vez == 1)
-            alocacaoInicial(partida.vez, tabuleiro_j1, &jogador1);
+            alocarInicialmente(partida.vez, tabuleiro_j1, &jogador1);
         else{
-            alocacaoInicial(partida.vez, tabuleiro_j2, &jogador2);
+            alocarInicialmente(partida.vez, tabuleiro_j2, &jogador2);
             partida.rodada_alocacao = 1;
         }   
         printf("Pressione Enter para continuar...");
@@ -44,9 +46,9 @@ void mostrarNaviosRestantes(Player *jogador){
 
         int id = jogador->navios[i].id;
         int vida = jogador->navios[i].vida;
-        int total = jogador->navios[i].tamanho_navio;
+        //int total = jogador->navios[i].tamanho_navio;
         
-        printf("# %s (ID %d): %d/%d %s\n",nomes[id - 1],id,vida,total, vida == 0 ? "[AFUNDADO]" : "");
+        printf("# %s (ID %d): %s\n",nomes[id - 1],id, vida == 0 ? "[AFUNDADO]" : "[VIVO]");
     }
 
     printf("\n");
@@ -56,24 +58,24 @@ void execJogo(){
     int opc, sair = 0;
     while(!partida.fim && sair == 0){
         do{
-        clear();
-        printf("-> Rodada: %d\n", partida.rodada);
-        printf("-> Vez do jogador: %d\n\n", partida.vez);
-        printf("--> Tabuleiro do jogador %d \n", 3 - partida.vez); 
+            clear();
+            printf("-> Rodada: %d\n", partida.rodada);
+            printf("-> Vez do jogador: %d\n\n", partida.vez);
+            printf("--> Tabuleiro do jogador %d \n", 3 - partida.vez); 
 
-        if(partida.vez == 1)
-            imprimirTabuleiro(tabuleiro_j2);
-        else 
-            imprimirTabuleiro(tabuleiro_j1);
+            if(partida.vez == 1)
+                imprimirTabuleiro(tabuleiro_j2);
+            else 
+                imprimirTabuleiro(tabuleiro_j1);
 
-        if(partida.vez == 1)
-        mostrarNaviosRestantes(&jogador1);
-        else
-        mostrarNaviosRestantes(&jogador2);
+            if(partida.vez == 1)
+            mostrarNaviosRestantes(&jogador1);
+            else
+            mostrarNaviosRestantes(&jogador2);
 
-        printf("\n[1] Realizar Palpite\n[0] Sair\nDigite uma opcao: ");
-        scanf("%d", &opc);
-        clearBuffer();
+            printf("\n[1] Realizar Palpite\n[0] Sair\nDigite uma opcao: ");
+            scanf("%d", &opc);
+            clearBuffer();
             if(opc !=1 && opc !=0){
                 printf("Opção invalida, tecle enter para continuar");
                 getchar();
@@ -86,15 +88,13 @@ void execJogo(){
                     realizarPalpite(&jogador1, &jogador2, tabuleiro_j2);
                 else{
                     realizarPalpite(&jogador2, &jogador1 , tabuleiro_j1);
-                    partida.rodada++;   
+                    partida.rodada++;
                 }
-                printf("\nPressione Enter para continuar...");
-                getchar();
+                    
                 partida.vez = trocarVez(partida.vez);
                 salvarJogo();
                 break;
             case 0:
-                //salvarJogo();
                 sair = 1;
                 break;
             default:
@@ -106,7 +106,8 @@ void execJogo(){
         clear();
     }
     if(partida.fim){
-        printf("Partida encerrada. Inicie uma nova partida.");
+        chamarCreditos();
+        printf("\n\nPartida encerrada. Inicie uma nova partida.");
         printf("\nPressione Enter para continuar...");
         getchar();
         getchar();
@@ -140,14 +141,15 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         break;
         
     }
-    while(1);        
-        
+    while(1);
+
+ 
     if(tabuleiro_adversario[x][y].valor != 0){
         int id = tabuleiro_adversario[x][y].valor;
-
-        printf("ACERTOU!\n");
-        jogador->acertos++;
         tabuleiro_adversario[x][y].impressao = '%';
+        printf("\nACERTOU!\n");
+        partida.historico[partida.tam_historico-1] = "Acertou";
+        jogador->acertos++;
 
         if(verificarVida(tabuleiro_adversario[x][y].valor, tabuleiro_adversario, jogador)){
             printf("\nO navio %d foi afundado!", id);
@@ -156,16 +158,20 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         }
     }
     else{
-        printf("Acertou... na Agua! :p\n");
         tabuleiro_adversario[x][y].impressao = 'x';
+        printf("\nAcertou... na Agua! :p\n");
+        partida.historico[partida.tam_historico-1] = "Errou";
         jogador->erros++;
     }
     printf("\nPressione enter para continuar");
     getchar();
     getchar();
     clear();
-    printf("A configuracao do tabuleiro do adversario ficou assim: \n\n");
+    printf("A configuracao do tabuleiro do inimigo ficou assim");
     imprimirTabuleiro(tabuleiro_adversario);
+    printf("\nPressione enter para continuar");
+    getchar();
+    clear();
 
     if(jogador_adversario->navios_restantes == 0){
         printf("\nFim de jogo, jogador %d venceu!!", partida.vez);
@@ -173,8 +179,9 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         partida.perdedor = soma - partida.vez;
         partida.fim = 1;
         criarCreditos(jogador, jogador_adversario);
-        chamarCreditos();
     }
+    partida.tam_historico +=1;
+    partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
 }
 
 int trocarVez(int vezAtual) {
@@ -232,7 +239,18 @@ void criarCreditos(Player *jogador, Player *jogador_adversario){
     fprintf(arquivo,"Erros: %d\n\n", jogador->erros);
     fprintf(arquivo, "Jogador perderdor %d\n", partida.perdedor);
     fprintf(arquivo, "Acertos: %d\n", jogador_adversario->acertos);
-    fprintf(arquivo,"Erros: %d", jogador_adversario->erros);
+    fprintf(arquivo,"Erros: %d\n\n", jogador_adversario->erros);
+
+    int k = 0;
+    fprintf(arquivo, "Rodada\t   Jogador1     Jogador2\n");
+    for(int i=0; i<partida.tam_historico; i++){
+        if(i%2 == 0)
+            fprintf(arquivo, "%d\t   %s", k+1, partida.historico[i]);
+        else{
+            fprintf(arquivo, "\t%s\n", partida.historico[i]);
+            k++;
+        }
+    }
     
     fclose(arquivo);
 }

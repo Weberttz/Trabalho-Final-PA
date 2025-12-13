@@ -26,7 +26,8 @@ typedef struct {
 //Struct que contém as informações do jogo
 typedef struct {
     int rodada, rodada_alocacao, vez, fim;
-    int vencedor, perdedor;
+    int vencedor, perdedor, tam_historico;
+    char **historico;
 }Jogo;
 
 extern Player jogador1, jogador2;

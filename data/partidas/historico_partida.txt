@@ -4,5 +4,21 @@ Acertos: 14
 Erros: 0
 
 Jogador perderdor 1
-Acertos: 13
-Erros: 1
+Acertos: 12
+Erros: 2
+
+Rodada	   Jogador1     Jogador2
+1	   Acertou	Acertou
+2	   Acertou	Acertou
+3	   Acertou	Acertou
+4	   Acertou	Acertou
+5	   Acertou	Acertou
+6	   Errou	Acertou
+7	   Acertou	Acertou
+8	   Acertou	Acertou
+9	   Errou	Acertou
+10	   Acertou	Acertou
+11	   Acertou	Acertou
+12	   Acertou	Acertou
+13	   Acertou	Acertou
+14	   Acertou	Acertou
