@@ -55,13 +55,17 @@ void mostrarNaviosRestantes(Player *jogador){
 }
 
 void execJogo(){
-    int opc, sair = 0;
+    int acertou, opc, sair = 0;
     while(!partida.fim && sair == 0){
         do{
             clear();
             printf("-> Rodada: %d\n", partida.rodada);
-            printf("-> Vez do jogador: %d\n\n", partida.vez);
-            printf("--> Tabuleiro do jogador %d \n", 3 - partida.vez); 
+            printf("-> Vez do jogador: %d | ", partida.vez);
+            if(partida.vez == 1)
+            printf("Acertos : %d | Erros : %d ", jogador1.acertos, jogador1.erros);
+            else
+            printf("Acertos : %d | Erros : %d ",  jogador2.acertos, jogador2.erros);
+            printf("\n\n--> Tabuleiro do jogador %d <-- \n", 3 - partida.vez); 
 
             if(partida.vez == 1)
                 imprimirTabuleiro(tabuleiro_j2);
@@ -84,14 +88,17 @@ void execJogo(){
 
         switch (opc) {
             case 1:
-                if(partida.vez == 1)
-                    realizarPalpite(&jogador1, &jogador2, tabuleiro_j2);
+                if(partida.vez == 1){
+                    acertou = realizarPalpite(&jogador1, &jogador2, tabuleiro_j2);
+                    partida.rodada++;
+                    }
                 else{
-                    realizarPalpite(&jogador2, &jogador1 , tabuleiro_j1);
+                    acertou = realizarPalpite(&jogador2, &jogador1 , tabuleiro_j1);
                     partida.rodada++;
                 }
-                    
-                partida.vez = trocarVez(partida.vez);
+                if(acertou == 0){
+                 partida.vez = trocarVez(partida.vez);
+                }
                 salvarJogo();
                 break;
             case 0:
@@ -114,8 +121,8 @@ void execJogo(){
     }
 }
 
-void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]){
-    int x,y, soma = 3; //Jogadores ( 1 + 2 )
+int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]){
+    int resultado, x,y, soma = 3; //Jogadores ( 1 + 2 )
     do {
         printf("Digite a linha do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &x) != 1) {
@@ -156,12 +163,14 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
             mudarRepNavio(id, tabuleiro_adversario);
             jogador_adversario->navios_restantes--;
         }
+        resultado = 1; 
     }
     else{
         tabuleiro_adversario[x][y].impressao = 'x';
         printf("\nAcertou... na Agua! :p\n");
         partida.historico[partida.tam_historico-1] = "Errou";
         jogador->erros++;
+        resultado = 0;
     }
     printf("\nPressione enter para continuar");
     getchar();
@@ -180,8 +189,10 @@ void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabule
         partida.fim = 1;
         criarCreditos(jogador, jogador_adversario);
     }
-    partida.tam_historico +=1;
+    partida.tam_historico++;
     partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
+
+    return resultado;
 }
 
 int trocarVez(int vezAtual) {

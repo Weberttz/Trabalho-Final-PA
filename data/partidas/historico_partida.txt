@@ -1,24 +1,19 @@
-Quantidade de rodadas: 14
-Jogador vencedor: 2
+Quantidade de rodadas: 18
+Jogador vencedor: 1
 Acertos: 14
-Erros: 0
+Erros: 1
 
-Jogador perderdor 1
-Acertos: 12
-Erros: 2
+Jogador perderdor 2
+Acertos: 2
+Erros: 1
 
 Rodada	   Jogador1     Jogador2
 1	   Acertou	Acertou
 2	   Acertou	Acertou
-3	   Acertou	Acertou
+3	   Acertou	Errou
 4	   Acertou	Acertou
-5	   Acertou	Acertou
-6	   Errou	Acertou
+5	   Errou	Acertou
+6	   Acertou	Acertou
 7	   Acertou	Acertou
 8	   Acertou	Acertou
-9	   Errou	Acertou
-10	   Acertou	Acertou
-11	   Acertou	Acertou
-12	   Acertou	Acertou
-13	   Acertou	Acertou
-14	   Acertou	Acertou
+9	   Acertou	Acertou

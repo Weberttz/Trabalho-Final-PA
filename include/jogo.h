@@ -18,7 +18,7 @@ int trocarVez(int vezAtual);
 void instrucoes();
 
 //Função dos palpites dos jogdores
-void realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]);
+int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabuleiro_adversario[tamanho][tamanho]);
 
 //Função que executa o jogo
 void execJogo();
