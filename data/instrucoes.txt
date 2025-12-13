@@ -5,6 +5,7 @@
   _| |_| | | \__ \ |_| |  | |_| | (_| (_) |  __/\__ \
  |_____|_| |_|___/\__|_|   \__,_|\___\___/ \___||___/
 
+O jogo tem dois momentos, a rodada de alocacao e as rodadas de palpites.
 
 Rodada de alocacao: 
 
@@ -13,14 +14,27 @@ coordenadas validas dentro do tabuleiro:
     * Dois navios nao podem ocupar a mesma posicao; 
     * Um navio nao pode ser posicionado fora do tabuleiro
 
+para posicionar um navio, o jogador deve escolher um dos 4 id's da tabela abaixo
+
+                    ID |     Navio    | Tamanho
+                    1  |     Bote     | 2 celulas
+                    2  |   Submarino  | 3 celulas
+                    3  | Navio-Tanque | 4 celulas
+                    4  | Porta-Avioes | 5 celulas
+
+escolher a posicao inicial (linha e coluna) que estao no intervalo de 0 a 9, e por fim a 
+direcao (n, s, l, o), n para norte, s para sul, l para leste e o para oeste.
+
+Finalizada as 4 escolhas de ambos os jogadores, comeca entao as rodadas de palpites.
+
 Rodadas de palpites:
 
 1- Os  jogadores  se  alternam  em  turnos  de  ataque.  Cada  jogada  consiste  
 em informar  coordenadas  (linha  e  coluna)  para  atacar  o  tabuleiro  inimigo.             
-O sistema indicara o resultado do ataque (acerto, erro ou navio afundado).            
+O sistema indicara o resultado do ataque (acerto, erro ou navio afundado).         
 O jogo termina quando todos os navios de um jogador forem destruidos. 
 
-2- Ao final da partida, o sistema ira exibir o vencedor, o numero de acertos e 
-erros  de  ambos  os  jogadores  e  a  quantidade  de  rodadas.  Essas  informacoes 
-tambem constarao constar em um arquivo de texto.
+2- Ao final da partida, o sistema ira exibir o vencedor e o perdedor, o numero de 
+acertos e erros  de  ambos  os  jogadores, o historico de cada palpite e a  quantidade 
+de  rodadas que a partida durou. Essas  informacoes tambem constarao em um arquivo de texto.
 
