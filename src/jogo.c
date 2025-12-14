@@ -171,7 +171,7 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
     }
     else{
         tabuleiro_adversario[x][y].impressao = 'x';
-        printf("\nERROU!s\n");
+        printf("\nERROU!\n");
         partida.tam_historico+=1;
         partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
         partida.historico[partida.tam_historico-1] = "Errou    ";
