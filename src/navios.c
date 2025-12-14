@@ -159,13 +159,13 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
             break;
         }
         do{
-            printf("Digite a linha da posicao incial do seu navio: ");
+            printf("\nDigite a linha da posicao incial do seu navio: ");
              if(scanf("%d", &jogador->navios[i].pos_incial[0]) != 1){
                 printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
                 continue;
             }
-            printf("Digite a coluna da posicao incial do seu navio: ");
+            printf("\nDigite a coluna da posicao incial do seu navio: ");
              if(scanf("%d", &jogador->navios[i].pos_incial[1]) != 1){
                 printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
@@ -185,14 +185,14 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
                 continue;
             }
             if(!verificarViabilidade(jogador->navios[i].tamanho_navio, l, c, tabuleiro)) { 
-                printf("Impossivel alocar o navio de tamanho %d a partir desta posição em QUALQUER direcao. Escolha outra posicao, bobao! \n", jogador->navios[i].tamanho_navio);
+                printf("Impossivel alocar o navio de tamanho %d a partir desta posicao em QUALQUER direcao. Escolha outra posicao! \n", jogador->navios[i].tamanho_navio);
                 continue;
             }
             break;
         }while(1);
         
         do{
-            printf("Digite a direcao do seu navio (n, s, l, o): ");
+            printf("\nDigite a direcao do seu navio (n, s, l, o): ");
             scanf(" %c", &jogador->navios[i].direcao);
             jogador->navios[i].direcao = tolower(jogador->navios[i].direcao); 
             

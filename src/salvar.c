@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include <string.h>
 #include "../include/salvar.h"
 
 const char *nomeArquivo = "../data/partidas/save.bin"; 
@@ -12,6 +12,11 @@ void salvarJogo() {
         return;
     }
     fwrite(&partida, sizeof(Jogo), 1, arquivo);
+    for (int i = 0; i < partida.tam_historico; i++) {
+        int tam = strlen(partida.historico[i]) + 1;
+        fwrite(&tam, sizeof(int), 1, arquivo);
+        fwrite(partida.historico[i], sizeof(char), tam, arquivo);
+    }
     fwrite(&jogador1, sizeof(Player), 1, arquivo);
     fwrite(&tabuleiro_j1, sizeof(Celulas), tamanho * tamanho, arquivo);
     fwrite(&jogador2, sizeof(Player), 1, arquivo);
@@ -28,6 +33,13 @@ void carregarJogo() {
     }
 
     fread(&partida, sizeof(Jogo), 1, arquivo);
+    partida.historico = malloc(partida.tam_historico * sizeof(char*));
+    for (int i = 0; i < partida.tam_historico; i++) {
+        int tam;
+        fread(&tam, sizeof(int), 1, arquivo);
+        partida.historico[i] = malloc(tam);
+        fread(partida.historico[i], sizeof(char), tam, arquivo);
+    }
     fread(&jogador1, sizeof(Player), 1, arquivo);
     fread(&tabuleiro_j1, sizeof(Celulas), tamanho * tamanho, arquivo);
     fread(&jogador2, sizeof(Player), 1, arquivo);

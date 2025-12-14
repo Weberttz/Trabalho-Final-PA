@@ -5,7 +5,7 @@
   _| |_| | | \__ \ |_| |  | |_| | (_| (_) |  __/\__ \
  |_____|_| |_|___/\__|_|   \__,_|\___\___/ \___||___/
 
-O jogo tem dois momentos, a rodada de alocacao e as rodadas de palpites.
+O jogo tem dois momentos, a rodada de alocacao e as rodadas de ataque.
 
 Rodada de alocacao: 
 
@@ -22,19 +22,21 @@ para posicionar um navio, o jogador deve escolher um dos 4 id's da tabela abaixo
                     3  | Navio-Tanque | 4 celulas
                     4  | Porta-Avioes | 5 celulas
 
-escolher a posicao inicial (linha e coluna) que estao no intervalo de 0 a 9, e por fim a 
-direcao (n, s, l, o), n para norte, s para sul, l para leste e o para oeste.
+escolher a posicao inicial (linha e coluna) que estao no intervalo de 0 a 9, e por 
+fim a direcao (n, s, l, o), n para norte, s para sul, l para leste e o para oeste.
 
-Finalizada as 4 escolhas de ambos os jogadores, comeca entao as rodadas de palpites.
+Finalizada as 4 escolhas de ambos os jogadores, comeca entao as rodadas de ataque.
 
-Rodadas de palpites:
+Rodadas de ataque:
 
 1- Os  jogadores  se  alternam  em  turnos  de  ataque.  Cada  jogada  consiste  
 em informar  coordenadas  (linha  e  coluna)  para  atacar  o  tabuleiro  inimigo.             
-O sistema indicara o resultado do ataque (acerto, erro ou navio afundado).         
-O jogo termina quando todos os navios de um jogador forem destruidos. 
+O sistema indicara o resultado do ataque (acerto, erro ou navio afundado). Caso o
+jogador acerte, ele tem direito a mais um palpite. O jogo termina quando todos os 
+navios de um jogador forem destruidos. 
 
 2- Ao final da partida, o sistema ira exibir o vencedor e o perdedor, o numero de 
-acertos e erros  de  ambos  os  jogadores, o historico de cada palpite e a  quantidade 
-de  rodadas que a partida durou. Essas  informacoes tambem constarao em um arquivo de texto.
+acertos e erros de ambos os jogadores, o historico de cada palpite e a quantidade 
+de rodadas que a partida durou. Essas  informacoes tambem constarao em um arquivo 
+de texto.
 

@@ -11,8 +11,8 @@ Jogo partida;
 
 void novojogo(){
     montarTabuleiros();
-    //partida.tam_historico = 2;
-    //partida.historico = malloc((partida.tam_historico) * sizeof(char*));
+    partida.tam_historico = 0;
+    partida.historico = malloc((partida.tam_historico) * sizeof(char*));
     partida.rodada = 1;
     partida.vez = 1;
     partida.rodada_alocacao = 0;
@@ -127,7 +127,7 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
     do {
         printf("Digite a linha do palpite (0-%d): " , tamanho-1);
         if(scanf("%d", &x) != 1) {
-            printf("Entrada invalida! Digite um número!\n");
+            printf("Entrada invalida! Digite um numero!\n");
             clearBuffer();
             continue;
         }
@@ -156,9 +156,10 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
         int id = tabuleiro_adversario[x][y].valor;
         tabuleiro_adversario[x][y].impressao = '%';
         printf("\nACERTOU!\n");
-        //partida.historico[partida.tam_historico-2] = "Acertou";
-        //partida.historico[partida.tam_historico-1] = "Bloqueado";
-        //partida.tam_historico+=2;
+        partida.tam_historico+=2;
+        partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
+        partida.historico[partida.tam_historico-2] = "Acertou  ";
+        partida.historico[partida.tam_historico-1] = "Bloqueado";
         jogador->acertos++;
 
         if(verificarVida(tabuleiro_adversario[x][y].valor, tabuleiro_adversario, jogador)){
@@ -170,9 +171,10 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
     }
     else{
         tabuleiro_adversario[x][y].impressao = 'x';
-        printf("\nAcertou... na Agua! :p\n");
-        //partida.historico[partida.tam_historico-2] = "Errou  ";
-        //partida.tam_historico+=1;
+        printf("\nERROU!s\n");
+        partida.tam_historico+=1;
+        partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
+        partida.historico[partida.tam_historico-1] = "Errou    ";
         jogador->erros++;
         resultado = 0;
     }
@@ -180,7 +182,7 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
     getchar();
     getchar();
     clear();
-    printf("A configuracao do tabuleiro do inimigo ficou assim");
+    printf("A configuracao do tabuleiro do inimigo ficou assim:\n");
     imprimirTabuleiro(tabuleiro_adversario);
     printf("\nPressione enter para continuar");
     getchar();
@@ -193,7 +195,6 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
         partida.fim = 1;
         criarCreditos(jogador, jogador_adversario);
     }
-    //partida.historico = realloc(partida.historico, partida.tam_historico * sizeof(char*));
 
     return resultado;
 }
@@ -255,16 +256,16 @@ void criarCreditos(Player *jogador, Player *jogador_adversario){
     fprintf(arquivo, "Acertos: %d\n", jogador_adversario->acertos);
     fprintf(arquivo,"Erros: %d\n\n", jogador_adversario->erros);
 
-    /*int k = 0;
-    fprintf(arquivo, "Rodada\t   Jogador1\tJogador2\n");
+    int k = 0;
+    fprintf(arquivo, "Rodada    Jogador1    Jogador2\n");
     for(int i=0; i<partida.tam_historico; i++){
         if(i%2 == 0)
-            fprintf(arquivo, "%d       %s", k+1, partida.historico[i]);
+            fprintf(arquivo, "%2d        %s", k+1, partida.historico[i]);
         else{
-            fprintf(arquivo, "\t%s\n", partida.historico[i]);
+            fprintf(arquivo, "   %s\n", partida.historico[i]);
             k++;
         }
-    }*/
+    }
     
     fclose(arquivo);
 }

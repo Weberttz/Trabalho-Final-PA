@@ -1,3 +1,0 @@
-C:/Users/johng/OneDrive/Documentos/C - C++/Trabalho-Final-PA/build/CMakeFiles/batalha-naval.dir
-C:/Users/johng/OneDrive/Documentos/C - C++/Trabalho-Final-PA/build/CMakeFiles/edit_cache.dir
-C:/Users/johng/OneDrive/Documentos/C - C++/Trabalho-Final-PA/build/CMakeFiles/rebuild_cache.dir
