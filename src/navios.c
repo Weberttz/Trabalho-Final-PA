@@ -101,7 +101,7 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
 
     do{
         clear();
-        printf("--- Periodo de alocacao dos navios ---\n\n");
+        printf("--> Periodo de alocacao dos navios <--\n\n");
         printf("Vez do jogador %d\n\n", vezAtual);
         imprimirTabuleiro(tabuleiro);
 
@@ -211,7 +211,7 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
     clear();
     printf("Tabuleiro do jogador %d\n\n", vezAtual);
     imprimirTabuleiro(tabuleiro);
-    mudarRepresentantes(tabuleiro);
+    mudarRepTabuleiro(tabuleiro);
     printf("\nConfiguracao bem sucedida.\n");
 }
 

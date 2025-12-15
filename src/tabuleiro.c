@@ -81,7 +81,7 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
     }
 }
 
-void mudarRepresentantes(Celulas tabuleiro[tamanho][tamanho]){
+void mudarRepTabuleiro(Celulas tabuleiro[tamanho][tamanho]){
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
             tabuleiro[i][j].impressao = '~';

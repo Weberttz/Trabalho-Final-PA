@@ -27,6 +27,6 @@ void execJogo();
 void criarCreditos(Player *jogador, Player *jogador_adversario);
 
 //Função que lê as informações do arquivo txt com o histórico da partida
-void chamarCreditos();
+void carregarCreditos();
 
 #endif

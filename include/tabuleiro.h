@@ -16,7 +16,7 @@ void montarTabuleiros();
 void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]);
 
 //Função que muda os representantes das células(tabuleiro);
-void mudarRepresentantes(Celulas tabuleiro[tamanho][tamanho]);
+void mudarRepTabuleiro(Celulas tabuleiro[tamanho][tamanho]);
 
 //Função que muda os representantes do tabuleiro, caso o navio seja destruído
 void mudarRepNavio(int id, Celulas tabuleiro[tamanho][tamanho]);

@@ -48,7 +48,7 @@ void mostrarNaviosRestantes(Player *jogador){
         int vida = jogador->navios[i].vida;
         //int total = jogador->navios[i].tamanho_navio;
         
-        printf("# %s (ID %d): %s\n",nomes[id - 1],id, vida == 0 ? "[AFUNDADO]" : "[VIVO]");
+        printf("# %s (ID %d): %s\n",nomes[id - 1],id, vida == 0 ? "[AFUNDADO]" : "[NAVEGANDO]");
     }
 
     printf("\n");
@@ -114,7 +114,7 @@ void execJogo(){
         clear();
     }
     if(partida.fim){
-        chamarCreditos();
+        carregarCreditos();
         printf("\n\nPartida encerrada. Inicie uma nova partida.");
         printf("\nPressione Enter para continuar...");
         getchar();
@@ -193,6 +193,8 @@ int realizarPalpite(Player *jogador, Player *jogador_adversario, Celulas tabulei
         partida.vencedor = partida.vez;
         partida.perdedor = soma - partida.vez;
         partida.fim = 1;
+        if(partida.vencedor == 2)
+        partida.tam_historico -= 1;
         criarCreditos(jogador, jogador_adversario);
     }
 
@@ -248,7 +250,7 @@ void criarCreditos(Player *jogador, Player *jogador_adversario){
     }
 
 
-    fprintf(arquivo, "Quantidade de rodadas: %d\n", partida.rodada);
+    fprintf(arquivo, "\nQuantidade de rodadas: %d\n", partida.rodada);
     fprintf(arquivo, "Jogador vencedor: %d\n", partida.vencedor);
     fprintf(arquivo, "Acertos: %d\n", jogador->acertos);
     fprintf(arquivo,"Erros: %d\n\n", jogador->erros);
@@ -270,7 +272,7 @@ void criarCreditos(Player *jogador, Player *jogador_adversario){
     fclose(arquivo);
 }
 
-void chamarCreditos(){
+void carregarCreditos(){
     clear();
     FILE *arquivo;
     const char *historico = "../data/partidas/historico_partida.txt";
