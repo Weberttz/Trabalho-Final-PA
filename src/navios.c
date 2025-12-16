@@ -2,11 +2,6 @@
 #include <ctype.h>
 #include "../include/navios.h"
 
-void prepararIds(Player *jogador){
-    for(int i = 0; i<total_navios; i++){
-       jogador->navios[i].id = -1;
-    }
-}
 
 int verificarAlocacao(int i, Player *jogador){
     for(int j=i-1; j>=0; j--){
@@ -60,8 +55,8 @@ int verificarPosicao(char direcao, int tamanho_navio, int x, int y, Celulas tabu
 }
 
 void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
-    int x = jogador->navios[i].pos_incial[0];
-    int y = jogador->navios[i].pos_incial[1];
+    int x = jogador->navios[i].pos_inicial[0];
+    int y = jogador->navios[i].pos_inicial[1];
     
     for(int l = 0; l< jogador->navios[i].tamanho_navio; l++){
         
@@ -95,7 +90,6 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
     jogador->navios_restantes = total_navios;
     jogador->acertos = 0;
     jogador->erros = 0;
-    prepararIds(jogador);
     
     char *nomes[] = {"Bote", "Submarino", "Navio-tanque", "Porta-avioes"};
 
@@ -159,20 +153,20 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
             break;
         }
         do{
-            printf("\nDigite a linha da posicao incial do seu navio: ");
-             if(scanf("%d", &jogador->navios[i].pos_incial[0]) != 1){
+            printf("\nDigite a linha da posicao inicial do seu navio: ");
+             if(scanf("%d", &jogador->navios[i].pos_inicial[0]) != 1){
                 printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
                 continue;
             }
-            printf("\nDigite a coluna da posicao incial do seu navio: ");
-             if(scanf("%d", &jogador->navios[i].pos_incial[1]) != 1){
+            printf("\nDigite a coluna da posicao inicial do seu navio: ");
+             if(scanf("%d", &jogador->navios[i].pos_inicial[1]) != 1){
                 printf("Entrava invalida. Digite um numero!\n");
                 clearBuffer(); 
                 continue;
             } 
-            int l = jogador->navios[i].pos_incial[0];
-            int c = jogador->navios[i].pos_incial[1];
+            int l = jogador->navios[i].pos_inicial[0];
+            int c = jogador->navios[i].pos_inicial[1];
                      
             if(l >= tamanho || l < 0 ||
             c >= tamanho ||c < 0){
@@ -185,7 +179,7 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
                 continue;
             }
             if(!verificarViabilidade(jogador->navios[i].tamanho_navio, l, c, tabuleiro)) { 
-                printf("Impossivel alocar o navio de tamanho %d a partir desta posicao em QUALQUER direcao. Escolha outra posicao! \n", jogador->navios[i].tamanho_navio);
+                printf("Impossivel alocar o navio de tamanho %d a partir desta posicao em QUALQUER direcao. Escolha outra posicao! :/ \n", jogador->navios[i].tamanho_navio);
                 continue;
             }
             break;
@@ -197,7 +191,7 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
             jogador->navios[i].direcao = tolower(jogador->navios[i].direcao); 
             
             if(!verificarPosicao(jogador->navios[i].direcao, jogador->navios[i].tamanho_navio, 
-                jogador->navios[i].pos_incial[0], jogador->navios[i].pos_incial[1], tabuleiro)){
+                jogador->navios[i].pos_inicial[0], jogador->navios[i].pos_inicial[1], tabuleiro)){
                 printf("Impossivel colocar navio nessa direcao!\n"); 
             }else {
                 break;
@@ -215,16 +209,16 @@ void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Playe
     printf("\nConfiguracao bem sucedida.\n");
 }
 
-int verificarVida(int id, Celulas tabuleiro[tamanho][tamanho], Player *jogador){
-    int contador = 0, indice;
+int verificarVida(int id, Player *jogador_adversario){
+    int indice;
     for(int i = 0; i<total_navios; i++){
-        if(jogador->navios[i].id == id){
+        if(jogador_adversario->navios[i].id == id){
             indice = i;
-            jogador->navios[i].vida--;
+            jogador_adversario->navios[i].vida--;
         }  
     }
 
-    if(jogador->navios[indice].vida == 0)
+    if(jogador_adversario->navios[indice].vida == 0)
         return 1;
     
     return 0;

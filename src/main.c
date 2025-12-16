@@ -1,14 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
-#include <stdbool.h>
 #include "../include/jogo.h"
 
 int main() {
     int resposta;
     FILE *menu;
     char linha[256];
-    setlocale(LC_ALL, "Portuguese");
 
     while (1) {  
         menu = fopen("../data/menu.txt", "r");

@@ -13,7 +13,7 @@ typedef struct{
 
 //Struct que contém as informações dos navios
 typedef struct{
-    int id, vida, tamanho_navio, pos_incial[2];
+    int id, vida, tamanho_navio, pos_inicial[2];
     char representante, direcao;
 }Navios;
 

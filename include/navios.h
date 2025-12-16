@@ -12,9 +12,6 @@ void alocarNavio(int i, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
 //Função que aloca os navios incialmente
 void alocarInicialmente(int vezAtual, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
 
-//Função que prepara os navios para uma verificação de id
-void prepararIds(Player *jogador);
-
 //Função que verifica se o id não foi utilizado
 int verificarAlocacao(int navio, Player *jogador);
 
@@ -25,6 +22,6 @@ int verificarPosicao(char direcao, int tamanho_navio, int x, int y, Celulas tabu
 int verificarViabilidade(int tamanho_navio, int x, int y, Celulas tabuleiro[tamanho][tamanho]);
 
 //Função que verifica se o navio foi afundado
-int verificarVida(int id, Celulas tabuleiro[tamanho][tamanho], Player *jogador);
+int verificarVida(int id, Player *jogador_adversario);
 
 #endif

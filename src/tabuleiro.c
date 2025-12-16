@@ -7,11 +7,11 @@ Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
 void montarTabuleiros() {
     for(int i = 0; i < tamanho; i++){
         for(int j = 0; j < tamanho; j++){
-            tabuleiro_j1[i][j].impressao = '~';
-            tabuleiro_j2[i][j].impressao = '~';
+            tabuleiro_j1[i][j].impressao = '~'; 
+            tabuleiro_j2[i][j].impressao = '~'; 
 
-            tabuleiro_j1[i][j].valor = 0;
-            tabuleiro_j2[i][j].valor = 0;
+            tabuleiro_j1[i][j].valor = 0; 
+            tabuleiro_j2[i][j].valor = 0; 
         }
     }
 }
@@ -26,6 +26,9 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
 
     for(int i = 0; i< tamanho; i++){
         printf("%2d  ", i);
+        // 34 -> Azul do mar
+        // 32 -> Verde do j1
+        // 33 -> Amarelo do j2
         for(int j=0; j< tamanho; j++){
             switch(tabuleiro[i][j].impressao){
                 case '~':
@@ -33,7 +36,7 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
                 break;
                 case 'b':
                 if (partida.vez == 1)
-                    printf("\033[32m%c  \033[0m", tabuleiro[i][j].impressao);   
+                    printf("\033[32m%c  \033[0m", tabuleiro[i][j].impressao);  
                 else
                     printf("\033[33m%c  \033[0m", tabuleiro[i][j].impressao);   
                 break;
@@ -84,7 +87,7 @@ void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]) {
 void mudarRepTabuleiro(Celulas tabuleiro[tamanho][tamanho]){
     for(int i=0; i<tamanho; i++){
         for(int j=0; j<tamanho; j++){
-            tabuleiro[i][j].impressao = '~';
+            tabuleiro[i][j].impressao = '~'; 
         }
     }
 }
@@ -98,4 +101,3 @@ void mudarRepNavio(int id, Celulas tabuleiro[tamanho][tamanho])
         }
     }
 }
-
