@@ -1,10 +1,24 @@
 #ifndef TABULEIRO_H_
 #define TABULEIRO_H_
 
-#include <stdio.h>
+#pragma once
 
-void montarTabuleiro() {
-    printf("Matriz montada");
-}
+#include "modulos.h"
 
-#endif
+#define tamanho 10
+
+extern Celulas tabuleiro_j1[tamanho][tamanho], tabuleiro_j2[tamanho][tamanho];
+
+//Função que monta os tabuleiros
+void montarTabuleiros();
+
+//Função que imprime o tabuleiro do jogador1
+void imprimirTabuleiro(Celulas tabuleiro[tamanho][tamanho]);
+
+//Função que muda os representantes das células(tabuleiro);
+void mudarRepTabuleiro(Celulas tabuleiro[tamanho][tamanho]);
+
+//Função que muda os representantes do tabuleiro, caso o navio seja destruído
+void mudarRepNavio(int id, Celulas tabuleiro[tamanho][tamanho]);
+
+#endif 

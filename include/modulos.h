@@ -1,0 +1,42 @@
+#ifndef MODULOS_H_
+#define MODULOS_H_
+
+#pragma once
+
+#define total_navios 4
+
+//struct que contém as informações de cada célula do tabuleiro
+typedef struct{
+    char impressao;
+    int valor;
+}Celulas;
+
+//Struct que contém as informações dos navios
+typedef struct{
+    int id, vida, tamanho_navio, pos_inicial[2];
+    char representante, direcao;
+}Navios;
+
+//struct que contém as infomações de cada jogador
+typedef struct {  
+    Navios navios[total_navios];
+    int acertos, erros, navios_restantes;
+}Player;
+
+//Struct que contém as informações do jogo
+typedef struct {
+    int rodada, rodada_alocacao, vez, fim;
+    int vencedor, perdedor, tam_historico;
+    char **historico;
+}Jogo;
+
+extern Player jogador1, jogador2;
+extern Jogo partida;
+
+//Função que limpa o terminal 
+void clear();
+
+//Função que limpa o buffer
+void clearBuffer();
+
+#endif

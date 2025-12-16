@@ -1,0 +1,25 @@
+
+Quantidade de rodadas: 14
+Jogador vencedor: 1
+Acertos: 14
+Erros: 0
+
+Jogador perderdor 2
+Acertos: 0
+Erros: 0
+
+Rodada    Jogador1    Jogador2
+ 1        Acertou     Bloqueado
+ 2        Acertou     Bloqueado
+ 3        Acertou     Bloqueado
+ 4        Acertou     Bloqueado
+ 5        Acertou     Bloqueado
+ 6        Acertou     Bloqueado
+ 7        Acertou     Bloqueado
+ 8        Acertou     Bloqueado
+ 9        Acertou     Bloqueado
+10        Acertou     Bloqueado
+11        Acertou     Bloqueado
+12        Acertou     Bloqueado
+13        Acertou     Bloqueado
+14        Acertou     Bloqueado

@@ -1,21 +1,42 @@
-  ____ _______ _   _ 
- |  _ \__   __| \ | |
- | |_) | | |  |  \| |
- |  _ <  | |  | . ` |
- | |_) | | |  | |\  |
- |____/  |_|  |_| \_|
-                     
-                                                                       
-RECEITA SUSHI
+  _____           _                                  
+ |_   _|         | |                                 
+   | |  _ __  ___| |_ _ __ _   _  ___ ___   ___  ___ 
+   | | | '_ \/ __| __| '__| | | |/ __/ _ \ / _ \/ __|
+  _| |_| | | \__ \ |_| |  | |_| | (_| (_) |  __/\__ \
+ |_____|_| |_|___/\__|_|   \__,_|\___\___/ \___||___/
 
-2 xícaras de arroz japonês (ou arroz para sushi)
+O jogo tem dois momentos, a rodada de alocacao e as rodadas de ataque.
 
-2 xícaras e 1/2 de água
+Rodada de alocacao: 
 
-4 colheres (sopa) de vinagre de arroz
+1- Cada jogador devera posicionar seus navios manualmente, informando 
+coordenadas validas dentro do tabuleiro:  
+    * Dois navios nao podem ocupar a mesma posicao; 
+    * Um navio nao pode ser posicionado fora do tabuleiro
 
-2 colheres (sopa) de açúcar
+para posicionar um navio, o jogador deve escolher um dos 4 id's da tabela abaixo
 
-1 colher (chá) de sal
+                    ID |     Navio    | Tamanho
+                    1  |     Bote     | 2 celulas
+                    2  |   Submarino  | 3 celulas
+                    3  | Navio-Tanque | 4 celulas
+                    4  | Porta-Avioes | 5 celulas
 
+escolher a posicao inicial (linha e coluna) que estao no intervalo de 0 a 9, e por 
+fim a direcao (n, s, l, o), n para norte, s para sul, l para leste e o para oeste.
+
+Finalizada as 4 escolhas de ambos os jogadores, comeca entao as rodadas de ataque.
+
+Rodadas de ataque:
+
+1- Os  jogadores  se  alternam  em  turnos  de  ataque.  Cada  jogada  consiste  
+em informar  coordenadas  (linha  e  coluna)  para  atacar  o  tabuleiro  inimigo.             
+O sistema indicara o resultado do ataque (acerto, erro ou navio afundado). Caso o
+jogador acerte, ele tem direito a mais um palpite. O jogo termina quando todos os 
+navios de um jogador forem destruidos. 
+
+2- Ao final da partida, o sistema ira exibir o vencedor e o perdedor, o numero de 
+acertos e erros de ambos os jogadores, o historico de cada palpite e a quantidade 
+de rodadas que a partida durou. Essas  informacoes tambem constarao em um arquivo 
+de texto.
 
